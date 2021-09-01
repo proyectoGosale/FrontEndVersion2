@@ -1,0 +1,89 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="breadcrumb breadcrumb-style ">
+                        <li class="breadcrumb-item">
+                            <h4 class="page-title">Capacidad</h4>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>Capacidad disponible</h2>
+                    </div>
+
+                    <div class="body">
+
+                        <mat-tab-group mat-align-tabs="start">
+
+                            <mat-tab *ngFor="let listaAlmacenes of listAlmacenes" [label]="listaAlmacenes.nombre">
+
+                                <div class="row" *ngIf="error!==0">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3 text-muted">
+                                        <h4 class="page-title text-center p-3 mt-3">Listado de secciones</h4>
+                                        <div class="body table-responsive">
+
+                                            <table class="table table-striped text-center">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Secciones</th>
+                                                        <th>Capacidad ocupada</th>
+                                                        <th>Capacidad disponible</th>
+                                                        <th>Capacidad total</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let listaSecciones of listaAlmacenes.secciones"
+                                                        [ngClass]="{'green' : listaSecciones.capacidad-listaSecciones.qty > listaSecciones.capacidad / 2, 
+                                                        'yellow': listaSecciones.capacidad-listaSecciones.qty <= listaSecciones.capacidad / 2, 
+                                                        'red': listaSecciones.capacidad-listaSecciones.qty == 0}">
+                                                        <td>
+                                                            <div style="margin-top: 25px;">
+                                                                <span class="">{{listaSecciones.nombre}}</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div style="margin-top: 25px;">
+                                                                <span class="">{{listaSecciones.qty}}</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div style="margin-top: 25px;">
+                                                                <span
+                                                                    class="">{{listaSecciones.capacidad-listaSecciones.qty}}</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div style="margin-top: 25px;">
+                                                                <span class="">{{listaSecciones.capacidad}}</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </mat-tab>
+
+
+
+
+                        </mat-tab-group>
+
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

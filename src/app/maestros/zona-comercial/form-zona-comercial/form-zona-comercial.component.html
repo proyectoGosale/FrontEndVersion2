@@ -1,0 +1,87 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="breadcrumb breadcrumb-style ">
+                        <li class="breadcrumb-item">
+                            <h4 class="page-title">Formulario zona comercial</h4>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>Zona comercial</h2>
+                    </div>
+                    <div class="body">
+                        <form class="m-4" [formGroup]="form" (ngSubmit)="submit()">
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Vendedor</mat-label>
+                                        <mat-select formControlName="vendedor" required>
+                                          <mat-option *ngFor="let vendedores of allVendedores" [value]="vendedores.id">{{vendedores.nombre}}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="form.get('vendedor').hasError('required')">
+                                            Ciudad es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Vendedor</mat-label>
+                                        <input matInput formControlName="vendedor" required>
+                                        <mat-icon matSuffix>work_outline</mat-icon>
+                                        <mat-error *ngIf="form.get('vendedor').hasError('required')">
+                                            Vendedor es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Nombre zona</mat-label>
+                                        <input matInput formControlName="zona" required>
+                                        <mat-icon matSuffix>work_outline</mat-icon>
+                                        <mat-error *ngIf="form.get('zona').hasError('required')">
+                                            Zona es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <!-- <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Ciudad</mat-label>
+                                        <mat-select formControlName="ciudad" required>
+                                          <mat-option *ngFor="let ciudad of ciudades" [value]="ciudades">{{ciudad.nombre}}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="form.get('ciudad').hasError('required')">
+                                            Ciudad es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div> -->
+                            
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <button class="mr-3" [disabled]="!form.valid" mat-raised-button
+                                        color="primary">Guardar</button>
+                                    <button type="button" (click)="cancel()" mat-button>Cancelar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

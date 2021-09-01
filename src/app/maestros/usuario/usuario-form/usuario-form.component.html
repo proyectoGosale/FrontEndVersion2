@@ -1,0 +1,151 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="breadcrumb breadcrumb-style ">
+                        <li class="breadcrumb-item">
+                            <h4 class="page-title">Formulario usuario</h4>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-1">
+                            <a routerLink="../../">
+                                <i class="fas fa-home"></i> Lista</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>Usuario</h2>
+                    </div>
+                    <div class="body">
+                        <form class="m-4" [formGroup]="form" (ngSubmit)="submit()">
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Nombres</mat-label>
+                                        <input matInput formControlName="firstName" required>
+                                        <mat-icon matSuffix>work_outline</mat-icon>
+                                        <mat-error *ngIf="form.get('firstName').hasError('required')">
+                                            Nombres es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Apellidos</mat-label>
+                                        <input matInput formControlName="lastName" required>
+                                        <mat-error *ngIf="form.get('lastName').hasError('required')">
+                                            Apellidos es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Tipo de documento</mat-label>
+                                        <mat-select formControlName="tipoDocumento">
+                                            <mat-option *ngFor="let tipo of tiposDocumentoList" [value]="tipo">
+                                                {{tipo}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="form.get('tipoDocumento').hasError('required')">
+                                            Tipo documento es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Número de documento</mat-label>
+                                        <input matInput formControlName="numeroDocumento" required>
+                                        <mat-error *ngIf="form.get('numeroDocumento').hasError('required')">
+                                            Número de documento es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Telefono</mat-label>
+                                        <input matInput formControlName="telefono" required>
+                                        <mat-error *ngIf="form.get('telefono').hasError('required')">
+                                            Telefono es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Correo electronico</mat-label>
+                                        <input matInput formControlName="email" required>
+                                        <mat-error *ngIf="form.get('email').hasError('required')">
+                                            Correo electronico es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Usuario</mat-label>
+                                        <input matInput formControlName="username" required>
+                                        <mat-error *ngIf="form.get('username').hasError('required')">
+                                            Usuario es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Contraseña</mat-label>
+                                        <input matInput formControlName="password" required>
+                                        <mat-error *ngIf="form.get('password').hasError('required')">
+                                            Contraseña es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <section class="example-section">
+                                        <label class="example-margin">Rol:</label>
+                                        <mat-radio-group formControlName="rol">
+                                            <!-- <mat-radio-button class="example-margin" value="coordMantenimiento">
+                                                Coord. Mantenimiento
+                                            </mat-radio-button> -->
+                                            <mat-radio-button class="example-margin" value="despachador">
+                                                Despachador
+                                            </mat-radio-button>
+                                            <mat-radio-button class="example-margin" value="programador">
+                                                Programador
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    </section>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <button class="mr-3" [disabled]="!form.valid" mat-raised-button
+                                        color="primary">Guardar</button>
+                                    <button type="button" (click)="cancel()" mat-button>Cancelar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

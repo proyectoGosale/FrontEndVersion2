@@ -1,0 +1,146 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="breadcrumb breadcrumb-style ">
+                        <li class="breadcrumb-item">
+                            <h4 class="page-title">Creación de despacho</h4>
+                            <h6 class="page-subtitle">Seleccione las referencias para el despacho</h6>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-12">
+            <form class="m-4" [formGroup]="formDespacho" (ngSubmit)="submit()">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Observaciones despacho</mat-label>
+                            <input matInput formControlName="observaciones" required>
+                            <mat-icon matSuffix>work_outline</mat-icon>
+                            <mat-error *ngIf="formDespacho.get('observaciones').hasError('required')">
+                                Observaciones es requerido
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Referencias despacho</mat-label>
+                            <textarea matInput rows="7" formControlName="referencia"></textarea>
+                            <mat-error *ngIf="formDespacho.get('referencia').hasError('required')">
+                                Referencias es requerido
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                        <button class="mr-3" [disabled]="!formDespacho.valid" mat-raised-button
+                            color="primary">Agregar</button>
+                        <button class="mr-3" type="button" mat-raised-button
+                            [disabled]=" formDespacho.invalid"
+                            color="primary" (click)="guardarDespacho()">Guardar despacho</button>
+                        <button class="mr-3" type="button" mat-raised-button color="warn"
+                            (click)="cancel()">Cancelar</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+
+    <div class="row" *ngIf="error!==0">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3 text-muted">
+            <h4 class="page-title text-center p-3 text-success">Lista de referencias</h4>
+            <div class="body table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>#</th>
+                            <th>Referencia</th>
+                            <th>Color primario</th>
+                            <th>Color secundario</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of referenciasSelectedList; let ix = index">
+                            <td>
+                                <button mat-icon-button aria-label="remove" type="button"
+                                    (click)="removeItem(item, ix)">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </td>
+                            <td>
+                                <div style="margin-top: 25px;">
+                                    <span class="text-success">{{ix +1 }}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-top: 25px;">
+                                    <span class="text-success">{{item?.nombre}}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-top: 25px;">
+                                    <span class="text-success">{{getColor(item?.color1)?.nombre}}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-top: 25px;">
+                                    <span class="text-success">{{getColor(item?.color2)?.nombre}}</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="error==0">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+            <h4 class="page-title text-center p-3 text-danger">Porfavor corrija los siguientes campos para continuar
+            </h4>
+            <div class="body table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Valor</th>
+                            <th>Linea</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let errores of erroresValoresEnTabla; let ix = index">
+                            <td></td>
+                            <td>
+                                <div style="margin-top: 25px;">
+                                    <span class="text-danger">{{errores?.valor}}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-top: 25px;">
+                                    <span class="text-danger">{{errores?.linea}}</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+</section>

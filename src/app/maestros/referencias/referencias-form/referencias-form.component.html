@@ -1,0 +1,74 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="breadcrumb breadcrumb-style ">
+                        <li class="breadcrumb-item">
+                            <h4 class="page-title">Formulario referencia</h4>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-1">
+                            <a routerLink="../../">
+                                <i class="fas fa-home"></i> Lista</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>Referencias</h2>
+                    </div>
+                    <div class="body">
+                        <form class="m-4" [formGroup]="form" (ngSubmit)="submit()">
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Nombre</mat-label>
+                                        <input matInput formControlName="nombre" required>
+                                        <mat-icon matSuffix>work_outline</mat-icon>
+                                        <mat-error *ngIf="form.get('nombre').hasError('required')">
+                                            Nombre es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Color primario</mat-label>
+                                        <mat-select formControlName="color1">
+                                            <mat-option *ngFor="let color of colorList" [value]="color.id">
+                                                {{color?.nombre}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Color secundario</mat-label>
+                                        <mat-select formControlName="color2">
+                                            <mat-option *ngFor="let color of colorList" [value]="color.id">
+                                                {{color?.nombre}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <button class="mr-3" [disabled]="!form.valid" mat-raised-button
+                                        color="primary">Guardar</button>
+                                    <button type="button" (click)="cancel()" mat-button>Cancelar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

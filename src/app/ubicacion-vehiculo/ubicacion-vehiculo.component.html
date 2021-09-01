@@ -1,0 +1,86 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="breadcrumb breadcrumb-style ">
+                        <li class="breadcrumb-item">
+                            <h4 class="page-title">Formulario ubicacion vehiculos</h4>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-1">
+                            <a routerLink="../">
+                                <i class="fas fa-home"></i> Lista</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>Ubicación vehiculos</h2>
+                    </div>
+                    <div class="body">
+                        <form class="m-4" [formGroup]="form">
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Vin</mat-label>
+                                        <input matInput formControlName="vin" required (keyup.enter)="onKey($event)">
+                                        <mat-icon matSuffix>work_outline</mat-icon>
+                                        <mat-error *ngIf="form.get('vin').hasError('required')">
+                                            vin es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Seleccione una sección</mat-label>
+                                        <mat-select formControlName="idSeccion">
+                                            <mat-option *ngFor="let secciones of seccionLista" [value]="secciones.id">
+                                                {{secciones.nombre}}</mat-option>
+                                            <mat-option value="otraUbicacion">Otra ubicación</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row" *ngIf="disabled===true">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Seleccione un almacen</mat-label>
+                                        <mat-select formControlName="almacen">
+                                            <mat-option *ngFor="let seccionesA of seccionAlmacenes" (click)="onClick()"
+                                                [value]="seccionesA.id">{{seccionesA.nombre}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Seleccione una sección</mat-label>
+                                        <mat-select formControlName="idSeccionOtraUbicacion">
+                                            <mat-option *ngFor="let seccionesSub of seccionPorIdALmacen"
+                                                [value]="seccionesSub.id">{{seccionesSub.nombre}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <button class="mr-3" [disabled]="!form.valid" mat-raised-button color="primary"
+                                        type="button" (click)="onSubmit()">Guardar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

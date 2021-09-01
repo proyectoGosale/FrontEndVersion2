@@ -1,0 +1,121 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="breadcrumb breadcrumb-style ">
+                        <li class="breadcrumb-item">
+                            <h4 class="page-title">Formulario vendedores</h4>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>Vendedores</h2>
+                    </div>
+                    <div class="body">
+                        <form class="m-4" [formGroup]="form" (ngSubmit)="submit()">
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Nombre</mat-label>
+                                        <input matInput formControlName="name" required>
+                                        <mat-icon matSuffix>work_outline</mat-icon>
+                                        <mat-error *ngIf="form.get('name').hasError('required')">
+                                            Nombre es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Segundo nombre</mat-label>
+                                        <input matInput formControlName="last_name" required>
+                                        <mat-icon matSuffix>work_outline</mat-icon>
+                                        <mat-error *ngIf="form.get('last_name').hasError('required')">
+                                            Segundo nombre es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Slug</mat-label>
+                                        <input matInput formControlName="slug" required>
+                                        <mat-icon matSuffix>work_outline</mat-icon>
+                                        <mat-error *ngIf="form.get('slug').hasError('required')">
+                                            Slug es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Email</mat-label>
+                                        <input matInput type="email" formControlName="email" required>
+                                        <mat-icon matSuffix>work_outline</mat-icon>
+                                        <mat-error *ngIf="form.get('email').hasError('required')">
+                                            Email es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Telefono</mat-label>
+                                        <input matInput formControlName="phone" required>
+                                        <mat-icon matSuffix>work_outline</mat-icon>
+                                        <mat-error *ngIf="form.get('phone').hasError('required')">
+                                            Telefono es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Contraseña</mat-label>
+                                        <input matInput formControlName="password" required>
+                                        <mat-icon matSuffix>work_outline</mat-icon>
+                                        <mat-error *ngIf="form.get('password').hasError('required')">
+                                            Contraseña de precios es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <section class="example-section">
+                                        <label class="example-margin">Rol:</label>
+                                        <mat-radio-group formControlName="role_id">
+                                            <mat-radio-button class="example-margin" *ngFor="let rol of roles" [value]="rol.id">
+                                                {{rol.nombre}}
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    </section>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <button class="mr-3" [disabled]="!form.valid" mat-raised-button
+                                        color="primary">Guardar</button>
+                                    <button type="button" (click)="cancel()" mat-button>Cancelar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

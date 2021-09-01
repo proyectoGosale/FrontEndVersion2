@@ -1,0 +1,157 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="breadcrumb breadcrumb-style ">
+                        <li class="breadcrumb-item">
+                            <h4 class="page-title">Gestión de despacho</h4>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="row mx-1 mt-5">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Observaciones despacho</mat-label>
+                            <input matInput disabled [value]="currentObservaciones">
+                            <mat-icon matSuffix>work_outline</mat-icon>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Vin</mat-label>
+                            <input matInput (keyup.enter)="onKey($event)">
+                            <mat-icon matSuffix>work_outline</mat-icon>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-12 pr-5">
+                        <div class="float-right">
+                            <button class="ml-1" type="button" mat-raised-button color="primary"
+                                [disabled]="puedeGuardar == false" (click)="guardarDespacho()">Guardar
+                                despacho</button>
+                            <button mat-flat-button type="button" class="d-inline-block ml-2" color="warn"
+                                (click)="cancel()" mat-button>Cancelar</button>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3 ">
+                        <h4 class="page-title text-center p-3 text-success mt-3 text-muted" [ngClass]="{'textColor': puedeGuardar == true}">Listado de referencias</h4>
+
+                        <div class="text-center d-block">
+                            <mat-chip-list aria-label="Fish selection">
+                                <mat-chip class="bg-success" selected>Vehiculos asignados: <span class="h4 ml-2 mb-0">
+                                        {{cantidadAsignada}}</span></mat-chip>
+                                <mat-chip>Vehiculos por asignar: <span class="h4 ml-2 mb-0"> {{ cantidadPorAsignar
+                                        }}</span></mat-chip>
+                            </mat-chip-list>
+                        </div>
+
+                        <!-- tabla en tamaño escritorio -->
+
+                        <div class="body table-responsive d-none d-sm-none d-md-block">
+                            <table class="table table-striped text-center">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <h5 class="text-center">Referencia</h5>
+                                        </th>
+                                        <th>
+                                            <h5 class="text-center">Color primario</h5>
+                                        </th>
+                                        <th>
+                                            <h5 class="text-center">Color secundario</h5>
+                                        </th>
+                                        <th>
+                                            <h5 class="text-center">Ubicacion</h5>
+                                        </th>
+                                        <th>
+                                            <h5 class="text-center">Vin asignado</h5>
+                                        </th>
+                                        <th class="text-center"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of referenciasSelectedList; let ix = index"
+                                        [ngClass]="{'referenciaAsignada': item.asignado}">
+                                        <td>
+                                            <div style="margin-top: 25px;">
+                                                <span>{{item?.referencia?.nombre}}</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="margin-top: 25px;">
+                                                <span>{{getColor(item?.referencia?.color1)?.nombre}}</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="margin-top: 25px;">
+                                                <span>{{getColor(item?.referencia?.color2)?.nombre}}</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="margin-top: 25px;">
+                                                <span>{{item?.vinAsig?.vin? '' : item?.seccion?.nombre}}</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="margin-top: 25px;">
+                                                <span>{{item?.vinAsig?.vin}}</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button mat-icon-button aria-label="remove" type="button"
+                                                (click)="removeItem(item?.vinAsig?.vin)" class="d-none"
+                                                [ngClass]="{'aparecerBoton': item.asignado}">
+                                                <mat-icon>delete</mat-icon>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- tarjetas en tamaño responsive -->
+
+                        <div class="d-block d-sm-block d-md-none text-center mt-4">
+                            <div class="card border-secondary mb-5 mx-5"
+                                [ngClass]="{'referenciaAsignada': item.asignado}"
+                                *ngFor="let item of referenciasSelectedList">
+                                <div class="card-header d-flex align-items-center">Vin: <span class="h5 mb-0 ml-2">{{item?.vinAsig?.vin}}</span>
+                                    <mat-icon (click)="removeItem(item?.vinAsig?.vin)" class="d-none text-danger m-0 ml-5" [ngClass]="{'aparecerBoton': item.asignado}">delete</mat-icon>
+                                </div>
+                                <div class="card-body text-secondary p-1">
+                                    <h6 class="">Referencia</h6>
+                                    <h5 class="card-title"><strong>{{item?.referencia?.nombre}}</strong></h5>
+                                    <h6 class="">Color primario</h6>
+                                    <h5 class="card-title">
+                                        <strong>{{getColor(item?.referencia?.color1)?.nombre}}</strong>
+                                    </h5>
+                                    <h6 class="">Color secundario</h6>
+                                    <h5 class="card-title">
+                                        <strong>{{getColor(item?.referencia?.color2)?.nombre}}</strong>
+                                    </h5>
+                                    <h6 class="">Ubicacion</h6>
+                                    <h5 class="card-title">
+                                        <strong>{{item?.vinAsig?.vin? '' : item?.seccion?.nombre }}</strong>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

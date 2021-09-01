@@ -1,0 +1,73 @@
+<div class="card">
+    <div class="header">
+        <div class="row">
+            <div class="col-8">
+                <h2>
+                    <strong>Despachos</strong>
+                </h2>
+            </div>
+            <div class="col-4">
+                <div class="float-right">
+                    <button mat-flat-button color="primary" class="btn" [routerLink]="['./form/0']" >
+                        Nuevo
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="body table-responsive">
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Filtrar</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="termino de busqueda">
+        </mat-form-field>
+
+        <table mat-table [dataSource]="dataSource3" class="w-100 text-center">
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef class="text-center"> Id </th>
+                <td mat-cell *matCellDef="let element"> {{element?.resp?.id}} </td>
+            </ng-container>
+            <ng-container matColumnDef="observaciones">
+                <th mat-header-cell *matHeaderCellDef class="text-center"> Observaciones </th>
+                <td mat-cell *matCellDef="let element"> {{element?.resp?.observaciones}} </td>
+            </ng-container>
+            <ng-container matColumnDef="creado">
+                <th mat-header-cell *matHeaderCellDef class="text-center"> F. creado </th>
+                <td mat-cell *matCellDef="let element"> {{element?.resp?.fechaCreacion | date}} </td>
+            </ng-container>
+            <ng-container matColumnDef="usuario">
+                <th mat-header-cell *matHeaderCellDef class="text-center"> Creado por </th>
+                <td mat-cell *matCellDef="let element">{{getUser(element?.resp?.creadoPor)?.firstName}}
+                    {{getUser(element?.resp?.creadoPor)?.lastName}} </td>
+            </ng-container>
+            <ng-container matColumnDef="asignadoA">
+                <th mat-header-cell *matHeaderCellDef class="text-center"> Asignado a </th>
+                <td mat-cell *matCellDef="let element"> {{getUser(element?.resp?.asignadoA)?.firstName}}
+                    {{getUser(element?.resp?.asignadoA)?.lastName}} </td>
+            </ng-container>
+            <ng-container matColumnDef="accion">
+                <th mat-header-cell *matHeaderCellDef class="text-center"> Acciones </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-stroked-button color="default" class="btn" [routerLink]="['./form', element.resp.id]">
+                        Detalles
+                    </button>
+                    <button mat-stroked-button color="default" class="btn d-none" (click)="openDialog(element.resp.id)"
+                        [ngClass]="{'aparecerBoton': element.asignado}">
+                        Asignar
+                    </button>
+                    <button mat-stroked-button color="default" class="btn d-none" (click)="openDialog(element.resp.id)"
+                        [ngClass]="{'aparecerBoton': element.asignado == false}">
+                        Reasignar
+                    </button>
+                    <button mat-stroked-button color="warn" class="btn" (click)="borrar(element.resp.id)">
+                        Borrar
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+</div>
