@@ -21,22 +21,6 @@ const routes: Routes = [
           import('./maestros/maestros.module').then(m => m.MaestrosModule)
       },
       {
-        path: 'despachos',
-        loadChildren: () => import('./despachos/despachos.module').then(m => m.DespachosModule)
-      },
-      {
-        path: 'ubicacionVehiculo',
-        loadChildren: () => import('./ubicacion-vehiculo/ubicacion-vehiculo.module').then(m => m.UbicacionVehiculoModule)
-      },
-      {
-        path: 'capacidad',
-        loadChildren: () => import('./ubicacion-vehiculo/capacidad-disponible/capacidad-disponible.module').then(m => m.CapacidadDisponibleModule)
-      },
-      { 
-        path: 'inboxDespacho', 
-        loadChildren: () => import('./inbox/inbox.module').then(m => m.InboxModule) 
-      },
-      {
         path: 'extra-pages',
         loadChildren: () =>
           import('./extra-pages/extra-pages.module').then(

@@ -1,14 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AlmacenComponent } from './almacen/almacen.component';
-import { FormAlmacenComponent } from './almacen/form-almacen/form-almacen.component';
-import { SeccionFormComponent } from './almacen/seccion/seccion-form/seccion-form.component';
-import { SeccionComponent } from './almacen/seccion/seccion.component';
 import { AddressClientesComponent } from './clientes/address-clientes/address-clientes.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { FormClientesComponent } from './clientes/form-clientes/form-clientes.component';
-import { ColorFormComponent } from './color/color-form/color-form.component';
-import { ColorComponent } from './color/color.component';
 import { ReferenciasFormComponent } from './referencias/referencias-form/referencias-form.component';
 import { ReferenciasComponent } from './referencias/referencias.component';
 
@@ -38,32 +32,6 @@ const routes: Routes = [
                 path: 'form/:id',
                 component: UsuarioFormComponent
             }
-        ]
-    },
-    {
-        path: 'almacen',
-        children: [
-            {
-                path: '',
-                component: AlmacenComponent
-            },
-            {
-                path: 'form/:id',
-                component: FormAlmacenComponent
-            },
-            {
-                path: 'seccion',
-                children: [
-                    {
-                        path: ':id',
-                        component: SeccionComponent
-                    },
-                    {
-                        path: ':idAlmacen/form/:id',
-                        component: SeccionFormComponent
-                    }
-                ]
-            },
         ]
     },
     {

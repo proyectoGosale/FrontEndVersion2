@@ -23,14 +23,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { UsuarioFormComponent } from './usuario/usuario-form/usuario-form.component';
-import { AlmacenComponent } from './almacen/almacen.component';
-import { FormAlmacenComponent } from './almacen/form-almacen/form-almacen.component';
-import { SeccionComponent } from './almacen/seccion/seccion.component';
-import { SeccionFormComponent } from './almacen/seccion/seccion-form/seccion-form.component';
 import { ReferenciasComponent } from './referencias/referencias.component';
 import { ReferenciasFormComponent } from './referencias/referencias-form/referencias-form.component';
-import { ColorComponent } from './color/color.component';
-import { ColorFormComponent } from './color/color-form/color-form.component';
 import { ZonaComercialComponent } from './zona-comercial/zona-comercial.component';
 import { FormZonaComercialComponent } from './zona-comercial/form-zona-comercial/form-zona-comercial.component';
 import { ClientesComponent } from './clientes/clientes.component';
@@ -45,14 +39,8 @@ import { AddressClientesComponent } from './clientes/address-clientes/address-cl
   declarations: [
     UsuarioComponent,
     UsuarioFormComponent,
-    AlmacenComponent,
-    FormAlmacenComponent,
-    SeccionComponent,
-    SeccionFormComponent,
     ReferenciasComponent,
     ReferenciasFormComponent,
-    ColorComponent,
-    ColorFormComponent,
     ZonaComercialComponent,
     FormZonaComercialComponent,
     ClientesComponent,

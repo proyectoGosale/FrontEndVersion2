@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, mergeMap } from 'rxjs/operators';
 import { AlertService } from 'src/services/alert.service';
-import { ColorService } from 'src/services/color.service';
 import { ReferenciasService } from 'src/services/referencias.service';
 import Swal from 'sweetalert2';
 
@@ -21,7 +20,6 @@ export class ReferenciasFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private colorService: ColorService,
     private referenciasService: ReferenciasService,
     private alertService: AlertService,
     private route: ActivatedRoute
@@ -29,7 +27,6 @@ export class ReferenciasFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildForm();
-    this.getColor()
     this.route.params.pipe(
       filter(params => params.id > 0),
       mergeMap((params) => {
@@ -88,8 +85,6 @@ export class ReferenciasFormComponent implements OnInit {
     })
   }
 
-  async getColor() {
-    this.colorList = await this.colorService.getAll().toPromise();
-  }
+  
 
 }
