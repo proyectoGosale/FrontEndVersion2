@@ -31,7 +31,8 @@ import { ClientesComponent } from './clientes/clientes.component';
 import { VendedoresComponent } from './vendedores/vendedores.component';
 import { FormVendedoresComponent } from './vendedores/form-vendedores/form-vendedores.component';
 import { FormClientesComponent } from './clientes/form-clientes/form-clientes.component';
-import { AddressClientesComponent } from './clientes/address-clientes/address-clientes.component';
+import { VisitasComponent } from './visitas/visitas.component';
+import { FormVisitasComponent } from './visitas/form-visitas/form-visitas.component';
 
 
 
@@ -47,7 +48,8 @@ import { AddressClientesComponent } from './clientes/address-clientes/address-cl
     VendedoresComponent,
     FormVendedoresComponent,
     FormClientesComponent,
-    AddressClientesComponent,
+    VisitasComponent,
+    FormVisitasComponent,
   ],
   imports: [
     CommonModule,

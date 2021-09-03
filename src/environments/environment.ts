@@ -4,11 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://5c2b-186-86-33-205.ngrok.io/api/',
-  // apiUrl: 'http://cobaltolabvm.cloudapp.net:9066/api/',
-  // apiUrl: 'http://localhost:4000/api/',
-  authUrl: ' http://5c2b-186-86-33-205.ngrok.io/api'
-  // authUrl: 'http://localhost:4000/users'
+  apiUrl: 'http://c34e-186-86-33-205.ngrok.io/api/',
+  authUrl: 'http://c34e-186-86-33-205.ngrok.io/api'
 };
 
 /*

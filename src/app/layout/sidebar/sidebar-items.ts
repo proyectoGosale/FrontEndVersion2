@@ -56,6 +56,15 @@ export const ROUTES: RouteInfo[] = [
     groupTitle: false,
     submenu: []
   },
+  {
+    path: '/maestros/visitas',
+    title: 'Visitas',
+    moduleName: 'visitas',
+    icon: 'far fa-file-alt',
+    class: '',
+    groupTitle: false,
+    submenu: []
+  },
   // {
   //   path: '/maestros/usuario',
   //   title: 'Usuarios',

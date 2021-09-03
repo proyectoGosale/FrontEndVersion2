@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AddressClientesComponent } from './clientes/address-clientes/address-clientes.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { FormClientesComponent } from './clientes/form-clientes/form-clientes.component';
 import { ReferenciasFormComponent } from './referencias/referencias-form/referencias-form.component';
@@ -10,6 +9,8 @@ import { UsuarioFormComponent } from './usuario/usuario-form/usuario-form.compon
 import { UsuarioComponent } from './usuario/usuario.component';
 import { FormVendedoresComponent } from './vendedores/form-vendedores/form-vendedores.component';
 import { VendedoresComponent } from './vendedores/vendedores.component';
+import { FormVisitasComponent } from './visitas/form-visitas/form-visitas.component';
+import { VisitasComponent } from './visitas/visitas.component';
 import { FormZonaComercialComponent } from './zona-comercial/form-zona-comercial/form-zona-comercial.component';
 import { ZonaComercialComponent } from './zona-comercial/zona-comercial.component';
 
@@ -31,6 +32,19 @@ const routes: Routes = [
             {
                 path: 'form/:id',
                 component: UsuarioFormComponent
+            }
+        ]
+    },
+    {
+        path: 'visitas',
+        children: [
+            {
+                path: '',
+                component: VisitasComponent
+            },
+            {
+                path: 'form/:id',
+                component: FormVisitasComponent
             }
         ]
     },
@@ -84,10 +98,6 @@ const routes: Routes = [
                 path: 'form/:id',
                 component: FormClientesComponent
             },
-            {
-                path: 'formAddress/:id/:idCliente',
-                component: AddressClientesComponent
-            }
         ]
     },
 

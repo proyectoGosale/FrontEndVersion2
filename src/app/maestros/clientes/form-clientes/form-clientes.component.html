@@ -21,13 +21,6 @@
                                     <strong>Cliente</strong>
                                 </h2>
                             </div>
-                            <div class="col-4">
-                                <div class="float-right">
-                                    <button mat-flat-button color="primary" class="btn" [routerLink]="['/maestros/clientes/formAddress/',currentId, currentId]">
-                                        Editar dirección
-                                    </button>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div class="body">
@@ -95,6 +88,58 @@
                                         </mat-select>
                                         <mat-error *ngIf="form.get('payment_terms').hasError('required')">
                                             Condiciones de pago es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Ciudad</mat-label>
+                                        <input matInput formControlName="city" required>
+                                        <mat-icon matSuffix>work_outline</mat-icon>
+                                        <mat-error *ngIf="form.get('city').hasError('required')">
+                                            Ciudad es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Barrio</mat-label>
+                                        <input matInput formControlName="neighborhood" required>
+                                        <mat-icon matSuffix>work_outline</mat-icon>
+                                        <mat-error *ngIf="form.get('neighborhood').hasError('required')">
+                                            Barrio es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Calle</mat-label>
+                                        <input matInput formControlName="street" required>
+                                        <mat-icon matSuffix>work_outline</mat-icon>
+                                        <mat-error *ngIf="form.get('street').hasError('required')">
+                                            Calle es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Numero dirección</mat-label>
+                                        <input matInput formControlName="number" required>
+                                        <mat-icon matSuffix>work_outline</mat-icon>
+                                        <mat-error *ngIf="form.get('number').hasError('required')">
+                                            Telefono es requerido
                                         </mat-error>
                                     </mat-form-field>
                                 </div>

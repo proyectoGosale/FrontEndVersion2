@@ -46,8 +46,10 @@ export class FormClientesComponent implements OnInit {
   }
 
   getVendedores() {
+    this.alertService.showLoading();
     this.vendedoresService.getAll().subscribe(resp => {
       this.listVendedores = resp.data;
+      this.alertService.hideSwal();
     })
   }
 
@@ -65,7 +67,7 @@ export class FormClientesComponent implements OnInit {
         this.clientesService.save(item).subscribe((res) => {
           this.idPorCliente = res.id
           this.alertService.showClienteCreado();
-          this.router.navigate(['./maestros/clientes/formAddress/',0,res.id])
+          this.router.navigate(['./maestros/clientes'])
         });
       }
     } else {
@@ -79,6 +81,10 @@ export class FormClientesComponent implements OnInit {
       slug: ['', Validators.required],
       phone: ['', Validators.required],
       payment_terms: ['', Validators.required],
+      city: ['', Validators.required],
+      neighborhood: ['', Validators.required],
+      street: ['', Validators.required],
+      number: ['', Validators.required],
     })
   }
 

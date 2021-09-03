@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from './../../shared/security/auth.service';
 import { UsuarioService } from 'src/services/usuario.service';
+import { AlertService } from 'src/services/alert.service';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -19,7 +20,7 @@ export class SigninComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private usuarioService: UsuarioService
+    private alertService: AlertService
   ) { }
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -35,6 +36,7 @@ export class SigninComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     this.error = '';
+    this.alertService.showLoading();
     if (this.loginForm.invalid) {
       this.error = 'Usuario  o contraseña no válidos !';
       return;
@@ -58,14 +60,16 @@ export class SigninComponent implements OnInit {
               // }
 
               this.router.navigate(['/maestros/vendedores']);
-
+              this.alertService.hideSwal();
             } else {
               this.error = 'Usuario  o contraseña no válidos';
+              this.alertService.hideSwal();
             }
           },
           (error) => {
             this.error = 'Usuario  o contraseña no válidos';
             this.submitted = false;
+            this.alertService.hideSwal();
           }
         );
     }
