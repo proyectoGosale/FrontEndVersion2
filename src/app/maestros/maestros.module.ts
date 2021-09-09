@@ -33,6 +33,8 @@ import { FormVendedoresComponent } from './vendedores/form-vendedores/form-vende
 import { FormClientesComponent } from './clientes/form-clientes/form-clientes.component';
 import { VisitasComponent } from './visitas/visitas.component';
 import { FormVisitasComponent } from './visitas/form-visitas/form-visitas.component';
+import { ProductosComponent } from './productos/productos.component';
+import { FormProductosComponent } from './productos/form-productos/form-productos.component';
 
 
 
@@ -50,6 +52,8 @@ import { FormVisitasComponent } from './visitas/form-visitas/form-visitas.compon
     FormClientesComponent,
     VisitasComponent,
     FormVisitasComponent,
+    ProductosComponent,
+    FormProductosComponent,
   ],
   imports: [
     CommonModule,

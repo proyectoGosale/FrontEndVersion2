@@ -5,7 +5,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <ul class="breadcrumb breadcrumb-style ">
                         <li class="breadcrumb-item">
-                            <h4 class="page-title">Formulario vendedores</h4>
+                            <h4 class="page-title">Formulario visitas</h4>
                         </li>
                     </ul>
                 </div>
@@ -15,7 +15,7 @@
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                 <div class="card">
                     <div class="header">
-                        <h2>Vendedores</h2>
+                        <h2>Visitas</h2>
                     </div>
                     <div class="body">
                         <form class="m-4" [formGroup]="form" (ngSubmit)="submit()">
@@ -52,22 +52,8 @@
                                     <mat-form-field class="example-full-width">
                                         <mat-label>Fecha</mat-label>
                                         <input matInput type="datetime-local" formControlName="date_hour" required>
-                                        <mat-icon matSuffix>work_outline</mat-icon>
                                         <mat-error *ngIf="form.get('date_hour').hasError('required')">
                                             Fecha es requerido
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
-
-                                    <mat-form-field appearance="fill">
-                                        <mat-label>Observaciones</mat-label>
-                                        <textarea matInput formControlName="observation"></textarea>
-                                        <mat-icon matSuffix>work_outline</mat-icon>
-                                        <mat-error *ngIf="form.get('observation: ').hasError('required')">
-                                            Observaciones es requerido
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
@@ -77,15 +63,26 @@
                                     <mat-form-field class="example-full-width">
                                         <mat-label>Estado</mat-label>
                                         <mat-select formControlName="status" required>
-                                            <mat-option value="Vencido"></mat-option>
-                                            <mat-option value="Anulado"></mat-option>
-                                            <mat-option value="Reprogramado"></mat-option>
-                                            <mat-option value="Programado"></mat-option>
-                                            <mat-option value="Pendiente"></mat-option>
-                                            <mat-option value="Visitado"></mat-option>
+                                            <mat-option value="Vencido">Vencido</mat-option>
+                                            <mat-option value="Anulado">Anulado</mat-option>
+                                            <mat-option value="Reprogramado">Reprogramado</mat-option>
+                                            <mat-option value="Programado">Programado</mat-option>
+                                            <mat-option value="Pendiente">Pendiente</mat-option>
+                                            <mat-option value="Visitado">Visitado</mat-option>
                                         </mat-select>
                                         <mat-error *ngIf="form.get('status').hasError('required')">
                                             Estado es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Observaciones</mat-label>
+                                        <textarea matInput rows="4" formControlName="observations"></textarea>
+                                        <mat-error *ngIf="form.get('observations').hasError('required')">
+                                            Observaciones es requerido
                                         </mat-error>
                                     </mat-form-field>
                                 </div>

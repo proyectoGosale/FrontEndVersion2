@@ -25,11 +25,7 @@ export class VendedoresService extends AppService{
     const header = this.setHeaders();
     return this.httpClient.get(`${this.url}/${id}`, { headers: header });
   }
-  public save(obj): Observable<any> {
-    const header = this.setHeaders();
-
-    return this.httpClient.post(`${this.url}/register`, obj, { headers: header });
-  }
+ 
   public update(obj): Observable<any> {
     const header = this.setHeaders();
     return this.httpClient.put(`${this.url}/${obj.id}`, obj, { headers: header });

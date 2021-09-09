@@ -23,22 +23,11 @@
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <mat-form-field class="example-full-width">
                                         <mat-label>Vendedor</mat-label>
-                                        <mat-select formControlName="vendedor" required>
-                                          <mat-option *ngFor="let vendedores of allVendedores" [value]="vendedores.id">{{vendedores.nombre}}</mat-option>
+                                        <mat-select formControlName="user_id" required>
+                                            <mat-option *ngFor="let vendedores of allVendedores"
+                                                [value]="vendedores.id">{{vendedores.name}}</mat-option>
                                         </mat-select>
-                                        <mat-error *ngIf="form.get('vendedor').hasError('required')">
-                                            Ciudad es requerido
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
-                                    <mat-form-field class="example-full-width">
-                                        <mat-label>Vendedor</mat-label>
-                                        <input matInput formControlName="vendedor" required>
-                                        <mat-icon matSuffix>work_outline</mat-icon>
-                                        <mat-error *ngIf="form.get('vendedor').hasError('required')">
+                                        <mat-error *ngIf="form.get('user_id').hasError('required')">
                                             Vendedor es requerido
                                         </mat-error>
                                     </mat-form-field>
@@ -47,15 +36,54 @@
                             <div class="row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <mat-form-field class="example-full-width">
+                                        <mat-label>Ciudad</mat-label>
+                                        <mat-select formControlName="city" required>
+                                            <mat-option *ngFor="let cities of city" [value]="cities.name">{{cities.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="form.get('city').hasError('required')">
+                                            Ciudad es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                          
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
                                         <mat-label>Nombre zona</mat-label>
-                                        <input matInput formControlName="zona" required>
+                                        <input matInput formControlName="name" required>
                                         <mat-icon matSuffix>work_outline</mat-icon>
-                                        <mat-error *ngIf="form.get('zona').hasError('required')">
+                                        <mat-error *ngIf="form.get('name').hasError('required')">
                                             Zona es requerido
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Incrementable</mat-label>
+                                        <input matInput type="number" formControlName="increment" required>
+                                        <mat-icon matSuffix>work_outline</mat-icon>
+                                        <mat-error *ngIf="form.get('increment').hasError('required')">
+                                            Incrementable es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <!-- <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <div class="">
+                                        <button (click)="desIncrement()"> - </button>
+                                        <div class="d-inline-block">
+                                            <p formControlName="increment">{{counter}}</p>
+                                        </div>
+                                        <button (click)="increment()"> + </button>
+                                    </div>
+                                </div>
+                            </div> -->
                             <!-- <div class="row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <mat-form-field class="example-full-width">
@@ -69,7 +97,7 @@
                                     </mat-form-field>
                                 </div>
                             </div> -->
-                            
+
                             <div class="row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <button class="mr-3" [disabled]="!form.valid" mat-raised-button

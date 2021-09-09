@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ClientesComponent } from './clientes/clientes.component';
 import { FormClientesComponent } from './clientes/form-clientes/form-clientes.component';
+import { FormProductosComponent } from './productos/form-productos/form-productos.component';
+import { ProductosComponent } from './productos/productos.component';
 import { ReferenciasFormComponent } from './referencias/referencias-form/referencias-form.component';
 import { ReferenciasComponent } from './referencias/referencias.component';
 
@@ -97,6 +99,19 @@ const routes: Routes = [
             {
                 path: 'form/:id',
                 component: FormClientesComponent
+            },
+        ]
+    },
+    {
+        path: 'productos',
+        children: [
+            {
+                path: '',
+                component: ProductosComponent
+            },
+            {
+                path: 'form/:id',
+                component: FormProductosComponent
             },
         ]
     },

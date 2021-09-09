@@ -78,13 +78,13 @@ export class FormClientesComponent implements OnInit {
     this.form = this.fb.group({
       user_id: ['', Validators.required],
       name: ['', Validators.required],
-      slug: ['', Validators.required],
       phone: ['', Validators.required],
       payment_terms: ['', Validators.required],
       city: ['', Validators.required],
       neighborhood: ['', Validators.required],
       street: ['', Validators.required],
       number: ['', Validators.required],
+      contact_name: ['', Validators.required]
     })
   }
 

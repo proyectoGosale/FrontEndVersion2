@@ -53,23 +53,11 @@
                             <div class="row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <mat-form-field class="example-full-width">
-                                        <mat-label>Slug</mat-label>
-                                        <input matInput formControlName="slug" required>
-                                        <mat-icon matSuffix>work_outline</mat-icon>
-                                        <mat-error *ngIf="form.get('slug').hasError('required')">
-                                            Slug es requerido
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
-                                    <mat-form-field class="example-full-width">
                                         <mat-label>Telefono</mat-label>
                                         <input matInput formControlName="phone" required>
                                         <mat-icon matSuffix>work_outline</mat-icon>
                                         <mat-error *ngIf="form.get('phone').hasError('required')">
-                                            Slug es requerido
+                                            Telefono es requerido
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
@@ -88,6 +76,19 @@
                                         </mat-select>
                                         <mat-error *ngIf="form.get('payment_terms').hasError('required')">
                                             Condiciones de pago es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Nombre de contacto</mat-label>
+                                        <input matInput formControlName="contact_name" required>
+                                        <mat-icon matSuffix>work_outline</mat-icon>
+                                        <mat-error *ngIf="form.get('contact_name').hasError('required')">
+                                            Nombre de contacto es requerido
                                         </mat-error>
                                     </mat-form-field>
                                 </div>

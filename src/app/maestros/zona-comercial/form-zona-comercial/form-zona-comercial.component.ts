@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, mergeMap } from 'rxjs/operators';
 import { AlertService } from 'src/services/alert.service';
+import { VendedoresService } from 'src/services/vendedores.service';
 import { ZonaService } from 'src/services/zona.service';
 import Swal from 'sweetalert2';
 
@@ -13,23 +14,36 @@ import Swal from 'sweetalert2';
 })
 export class FormZonaComercialComponent implements OnInit {
 
-  allVendedores: any[];
+  city: any[] = [
+  {name:'Medellín'},{name:'Cali'},{name:'Popayán'},{name:'Pasto'},{name:'Manizales'},{name: 'Bogotá'},
+  {name: 'Pereira'},{name:'Armenia'},{name:'Valledupar'},{name:'Bucaramanga'},{name:'Yopal'}
+  ]
 
+  counter = 0;
+
+  increment() {
+    this.counter++; 
+  }          
+
+  desIncrement() {
+    this.counter--;
+  }
+
+  allVendedores: any[] = [];
   form: FormGroup;
   currentId = 0;
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private zonaService: ZonaService,
-    
+    private vendedoresService: VendedoresService,
     private alertService: AlertService,
     private route: ActivatedRoute
   ) { }
 
-  
-
   ngOnInit(): void {
     this.buildForm();
+    this.getData();
     this.route.params.pipe(
       filter(params => params.id > 0),
       mergeMap((params) => {
@@ -37,8 +51,7 @@ export class FormZonaComercialComponent implements OnInit {
           return this.zonaService.getById(params.id)
         }
       )).subscribe((almacen) => {
-        this.alertService.showLoading();
-        this.form.patchValue(almacen);
+        this.form.patchValue(almacen.data);
         this.currentId = almacen.id;
         this.alertService.hideSwal();
     })
@@ -66,12 +79,20 @@ export class FormZonaComercialComponent implements OnInit {
     }
   }
 
-
+  getData() {
+    this.alertService.showLoading();
+    this.vendedoresService.getAll().subscribe(resp => {
+      this.allVendedores = resp.data;
+      this.alertService.hideSwal();
+    })
+  }
 
   buildForm() {
     this.form = this.fb.group({
-      vendedor: ['', Validators.required],
-      zona: ['', Validators.required],
+      user_id: ['', Validators.required],
+      name: ['', Validators.required],
+      city: ['', Validators.required],
+      increment: ['', Validators.required],
     })
   }
 

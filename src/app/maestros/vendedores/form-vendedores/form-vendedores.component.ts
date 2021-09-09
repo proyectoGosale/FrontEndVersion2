@@ -51,7 +51,6 @@ export class FormVendedoresComponent implements OnInit {
       }
       )).subscribe((vendedor) => {
         console.log(vendedor);
-        
         this.form.patchValue(vendedor.data);
         this.alertService.hideSwal();
       })
@@ -94,7 +93,6 @@ export class FormVendedoresComponent implements OnInit {
     this.form = this.fb.group({
       name: ['', Validators.required],
       last_name: ['', Validators.required],
-      slug: ['', Validators.required],
       phone: ['', Validators.required],
       email: ['', Validators.required],
       role_id: ['', Validators.required],

@@ -5,6 +5,7 @@ import { filter, mergeMap } from 'rxjs/operators';
 import { AlertService } from 'src/services/alert.service';
 import { ClientesService } from 'src/services/clientes.service';
 import { VendedoresService } from 'src/services/vendedores.service';
+import { VisitasService } from 'src/services/visitas.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,21 +15,6 @@ import Swal from 'sweetalert2';
 })
 export class FormVisitasComponent implements OnInit {
 
-  roles: any = [
-    {
-      nombre: 'Super administrador',
-      id: 1
-    },
-    {
-      nombre: 'Administrador',
-      id: 2
-    },
-    {
-      nombre: 'Vendedor',
-      id: 3
-    }
-  ]
-
   listVendedores: any[] = [];
   listClientes: any[] = [];
   form: FormGroup;
@@ -36,6 +22,7 @@ export class FormVisitasComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private visitasService: VisitasService,
     private clientesService: ClientesService,
     private vendedoresService: VendedoresService,
     private alertService: AlertService,
@@ -43,6 +30,8 @@ export class FormVisitasComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getVendedores();
+    this.getClientes();
     this.buildForm();
     this.route.params.subscribe(resp => {
       this.currentId = resp.id
@@ -51,24 +40,28 @@ export class FormVisitasComponent implements OnInit {
       filter(params => params.id > 0),
       mergeMap((params) => {
         this.alertService.showLoading();
-        return this.clientesService.getById(params.id)
+        return this.visitasService.getById(params.id)
       }
       )).subscribe((visita) => {
-        console.log(visita);
+        console.log(visita);        
         this.form.patchValue(visita.data);
         this.alertService.hideSwal();
       })
   }
 
   getVendedores() {
+    this.alertService.showLoading();
     this.vendedoresService.getAll().subscribe(resp => {
       this.listVendedores = resp.data;
+      this.alertService.hideSwal();
     })
   }
   
   getClientes() {
+    this.alertService.showLoading();
     this.clientesService.getAll().subscribe(resp => {
       this.listClientes = resp.data;
+      this.alertService.hideSwal();
     })
   }
 
@@ -77,7 +70,7 @@ export class FormVisitasComponent implements OnInit {
       let item = this.form.value;
       this.alertService.showLoading();
       if (this.currentId > 0) {
-        this.clientesService.update2(this.currentId, item).subscribe(res => {
+        this.visitasService.update2(this.currentId, item).subscribe(res => {
           let text = res.message
           Swal.fire({
             title: 'Exito',
@@ -85,11 +78,11 @@ export class FormVisitasComponent implements OnInit {
             icon: 'success',
             confirmButtonText: 'Continuar',
           }).then((response) => {
-            this.router.navigate(['./maestros/vendedores'])
+            this.router.navigate(['./maestros/visitas'])
           })
         });
       } else {
-        this.clientesService.save(item).subscribe((res) => {
+        this.visitasService.save(item).subscribe((res) => {
           let text = res.message
           Swal.fire({
             title: 'Exito',
@@ -97,7 +90,7 @@ export class FormVisitasComponent implements OnInit {
             icon: 'success',
             confirmButtonText: 'Continuar',
           }).then((response) => {
-            this.router.navigate(['./maestros/vendedores'])
+            this.router.navigate(['./maestros/visitas'])
           });
         });
       }
@@ -110,7 +103,7 @@ export class FormVisitasComponent implements OnInit {
       user_id: ['', Validators.required],
       client_id: ['', Validators.required],
       date_hour: ['', Validators.required],
-      observation: ['', Validators.required],
+      observations: ['', Validators.required],
       status: ['', Validators.required],
     })
   }
@@ -125,7 +118,7 @@ export class FormVisitasComponent implements OnInit {
       showCancelButton: true
     }).then((response) => {
       if (!response.dismiss) {
-        this.router.navigate(['./maestros/vendedores'])
+        this.router.navigate(['./maestros/visitas'])
       }
     })
   }
