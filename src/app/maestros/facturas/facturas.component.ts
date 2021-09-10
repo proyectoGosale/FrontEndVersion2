@@ -1,35 +1,48 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { AlertService } from 'src/services/alert.service';
-import { CategoriasService } from 'src/services/categorias.service';
-import { VendedoresService } from 'src/services/vendedores.service';
+import { FacturasService } from 'src/services/facturas.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-productos',
-  templateUrl: './productos.component.html',
-  styleUrls: ['./productos.component.sass']
+  selector: 'app-facturas',
+  templateUrl: './facturas.component.html',
+  styleUrls: ['./facturas.component.sass']
 })
-export class ProductosComponent implements OnInit {
+export class FacturasComponent implements OnInit {
 
-  categorias: any[] = [];
+  displayedColumns: string[] = [
+    'id',
+    'TD',
+    'date',
+    'total',
+    'accion'
+  ];
+
+  dataSource3 = new MatTableDataSource([]);
 
   constructor(
-    private categoriasService: CategoriasService,
+    private facturasService: FacturasService,
     private alertService: AlertService
   ) { }
 
   ngOnInit(): void {
-    this.getData();    
+    this.getData();
   }
 
   private getData() {
     this.alertService.showLoading();
-    this.categoriasService.getAll().subscribe((res) => {
-      this.categorias = res.data;
+    this.facturasService.getAll().subscribe((res) => {
+      this.dataSource3.data = res.data.filter(resp => resp.document_type == "Factura");
       this.alertService.hideSwal();
     }, (err) => {
+
     });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource3.filter = filterValue.trim().toLowerCase();
   }
 
   borrar(id) {
@@ -43,7 +56,7 @@ export class ProductosComponent implements OnInit {
 
     }).then((response) => {
       if (!response.dismiss) {
-        this.categoriasService.delete(id).subscribe(res => {
+        this.facturasService.delete(id).subscribe(res => {
           this.getData();
         }, (err) => {
           this.alertService.showError()
@@ -51,5 +64,4 @@ export class ProductosComponent implements OnInit {
       }
     })
   }
-
 }

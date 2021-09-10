@@ -1,3 +1,4 @@
+<p>list-category works!</p>
 <section class="content">
     <div class="container-fluid">
         <div class="block-header">
@@ -19,8 +20,15 @@
                     <div class="row">
                         <div class="col-8">
                             <h2>
-                                <strong>Productos</strong>
+                                <strong>Lista de producto por categoria</strong>
                             </h2>
+                        </div>
+                        <div class="col-4">
+                            <div class="float-right">
+                                <button mat-flat-button color="primary" class="btn" [routerLink]="['/maestros/productos/listProductos']">
+                                    Administrar productos
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -32,11 +40,10 @@
                                 <mat-card-title class="card-text text-center mt-2">{{categories.name}}</mat-card-title>
                             </mat-card-content>
                             <mat-card-actions class="text-center mb-2">
-                              <button mat-flat-button color="primary" class="btn w-100" [routerLink]="['./listCategory/',categories.id]">Ver</button>
+                              <button mat-flat-button color="primary" class="btn w-100" [routerLink]="['./listCategory/',categories.id]">Ver mas</button>
                             </mat-card-actions>
                           </mat-card>
                     </div>
-                   
                 </div>
             </div>
         </div>

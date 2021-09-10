@@ -2,17 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { AlertService } from 'src/services/alert.service';
 import { CategoriasService } from 'src/services/categorias.service';
-import { VendedoresService } from 'src/services/vendedores.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-productos',
-  templateUrl: './productos.component.html',
-  styleUrls: ['./productos.component.sass']
+  selector: 'app-categorias',
+  templateUrl: './categorias.component.html',
+  styleUrls: ['./categorias.component.sass']
 })
-export class ProductosComponent implements OnInit {
+export class CategoriasComponent implements OnInit {
 
-  categorias: any[] = [];
+  displayedColumns: string[] = [
+    'id',
+    'categoria',
+    'accion'
+  ];
+
+  dataSource3 = new MatTableDataSource([]);
 
   constructor(
     private categoriasService: CategoriasService,
@@ -20,16 +25,22 @@ export class ProductosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getData();    
+    this.getData();
   }
 
   private getData() {
     this.alertService.showLoading();
     this.categoriasService.getAll().subscribe((res) => {
-      this.categorias = res.data;
+      this.dataSource3.data = res.data;
       this.alertService.hideSwal();
     }, (err) => {
+
     });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource3.filter = filterValue.trim().toLowerCase();
   }
 
   borrar(id) {

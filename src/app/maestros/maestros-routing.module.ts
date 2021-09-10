@@ -2,7 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ClientesComponent } from './clientes/clientes.component';
 import { FormClientesComponent } from './clientes/form-clientes/form-clientes.component';
-import { FormProductosComponent } from './productos/form-productos/form-productos.component';
+import { FacturasComponent } from './facturas/facturas.component';
+import { FormFacturasComponent } from './facturas/form-facturas/form-facturas.component';
+import { CrudProductosComponent } from './productos/crud-productos/crud-productos.component';
+import { FormCrudProductosComponent } from './productos/crud-productos/form-crud-productos/form-crud-productos.component';
+import { ListCategoryComponent } from './productos/list-category/list-category.component';
 import { ProductosComponent } from './productos/productos.component';
 import { ReferenciasFormComponent } from './referencias/referencias-form/referencias-form.component';
 import { ReferenciasComponent } from './referencias/referencias.component';
@@ -110,8 +114,35 @@ const routes: Routes = [
                 component: ProductosComponent
             },
             {
+                path: 'listCategory/:id',
+                component: ListCategoryComponent
+            },
+            {
+                path: 'listProductos',
+                children: [
+                    {
+                        path: '',
+                        component: CrudProductosComponent
+                    },
+                    {
+                        path: 'form/:id',
+                        component: FormCrudProductosComponent
+                    },
+                ]
+            },
+        ]
+    },
+
+    {
+        path: 'facturas',
+        children: [
+            {
+                path: '',
+                component: FacturasComponent
+            },
+            {
                 path: 'form/:id',
-                component: FormProductosComponent
+                component: FormFacturasComponent
             },
         ]
     },

@@ -35,6 +35,13 @@ import { VisitasComponent } from './visitas/visitas.component';
 import { FormVisitasComponent } from './visitas/form-visitas/form-visitas.component';
 import { ProductosComponent } from './productos/productos.component';
 import { FormProductosComponent } from './productos/form-productos/form-productos.component';
+import { ListCategoryComponent } from './productos/list-category/list-category.component';
+import { FacturasComponent } from './facturas/facturas.component';
+import { FormFacturasComponent } from './facturas/form-facturas/form-facturas.component';
+import { CrudProductosComponent } from './productos/crud-productos/crud-productos.component';
+import { FormCrudProductosComponent } from './productos/crud-productos/form-crud-productos/form-crud-productos.component';
+import { CategoriasComponent } from './categorias/categorias.component';
+import { FormCategoriasComponent } from './categorias/form-categorias/form-categorias.component';
 
 
 
@@ -54,6 +61,13 @@ import { FormProductosComponent } from './productos/form-productos/form-producto
     FormVisitasComponent,
     ProductosComponent,
     FormProductosComponent,
+    ListCategoryComponent,
+    FacturasComponent,
+    FormFacturasComponent,
+    CrudProductosComponent,
+    FormCrudProductosComponent,
+    CategoriasComponent,
+    FormCategoriasComponent,
   ],
   imports: [
     CommonModule,
