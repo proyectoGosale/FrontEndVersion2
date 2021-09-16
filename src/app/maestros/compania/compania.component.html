@@ -19,15 +19,8 @@
                     <div class="row">
                         <div class="col-8">
                             <h2>
-                                <strong>Visitas</strong>
+                                <strong>Compañia</strong>
                             </h2>
-                        </div>
-                        <div class="col-4">
-                            <div class="float-right">
-                                <button mat-flat-button color="primary" class="btn" [routerLink]="['./form/0']">
-                                    Nuevo
-                                </button>
-                            </div>
                         </div>
                     </div>
 
@@ -37,30 +30,34 @@
                         <mat-label>Filtrar</mat-label>
                         <input matInput (keyup)="applyFilter($event)" placeholder="termino de busqueda">
                     </mat-form-field>
-
                     <table mat-table [dataSource]="dataSource3" class="w-100 text-center">
                         <ng-container matColumnDef="id">
-                            <th mat-header-cell *matHeaderCellDef class="text-center"> Id visita </th>
+                            <th mat-header-cell *matHeaderCellDef class="text-center"> Id </th>
                             <td mat-cell *matCellDef="let element"> {{element.id}} </td>
                         </ng-container>
-                        <ng-container matColumnDef="cliente">
-                            <th mat-header-cell *matHeaderCellDef class="text-center"> Cliente </th>
-                            <td mat-cell *matCellDef="let element"> {{getClientes(element?.client_id)?.name}} </td>
+                        <ng-container matColumnDef="address">
+                            <th mat-header-cell *matHeaderCellDef class="text-center"> Dirección </th>
+                            <td mat-cell *matCellDef="let element"> {{element.address}} </td>
                         </ng-container>
-                        <ng-container matColumnDef="fecha">
-                            <th mat-header-cell *matHeaderCellDef class="text-center"> Fecha y hora </th>
-                            <td mat-cell *matCellDef="let element"> {{element.date_hour}} </td>
+                        <ng-container matColumnDef="business_name">
+                            <th mat-header-cell *matHeaderCellDef class="text-center"> Nombre compañia </th>
+                            <td mat-cell *matCellDef="let element"> {{element.business_name}} </td>
                         </ng-container>
-                        <ng-container matColumnDef="estado">
-                            <th mat-header-cell *matHeaderCellDef class="text-center"> Estado </th>
-                            <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                        <ng-container matColumnDef="email">
+                            <th mat-header-cell *matHeaderCellDef class="text-center"> Email </th>
+                            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="nit">
+                            <th mat-header-cell *matHeaderCellDef class="text-center"> Nit </th>
+                            <td mat-cell *matCellDef="let element"> {{element.nit}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="phone">
+                            <th mat-header-cell *matHeaderCellDef class="text-center"> Telefono </th>
+                            <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
                         </ng-container>
                         <ng-container matColumnDef="accion">
                             <th mat-header-cell *matHeaderCellDef class="text-center"> Acciones </th>
                             <td mat-cell *matCellDef="let element">
-                                <button mat-stroked-button color="default" class="btn" (click)="openDialog(element.id)">
-                                    Detalles
-                                </button>
                                 <button mat-stroked-button color="default" class="btn"
                                     [routerLink]="['./form', element.id]">
                                     Editar

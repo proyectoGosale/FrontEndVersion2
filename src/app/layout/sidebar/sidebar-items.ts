@@ -21,9 +21,27 @@ export const ROUTES: RouteInfo[] = [
     submenu: []
   },
   {
+    path: '/maestros/categorias',
+    title: 'Categorias',
+    moduleName: 'categorias',
+    icon: 'far fa-file-alt',
+    class: '',
+    groupTitle: false,
+    submenu: []
+  },
+  {
     path: '/maestros/productos',
     title: 'Productos',
     moduleName: 'productos',
+    icon: 'far fa-file-alt',
+    class: '',
+    groupTitle: false,
+    submenu: []
+  },
+  {
+    path: '/maestros/compania',
+    title: 'Compañia',
+    moduleName: 'compañia',
     icon: 'far fa-file-alt',
     class: '',
     groupTitle: false,
@@ -65,42 +83,6 @@ export const ROUTES: RouteInfo[] = [
     groupTitle: false,
     submenu: []
   },
-  // {
-  //   path: '/maestros/usuario',
-  //   title: 'Usuarios',
-  //   moduleName: 'maestros',
-  //   icon: '',
-  //   class: 'ml-menu',
-  //   groupTitle: false,
-  //   submenu: []
-  // },
-  // {
-  //   path: '/maestros/almacen',
-  //   title: 'Almacen',
-  //   moduleName: 'maestros',
-  //   icon: '',
-  //   class: 'ml-menu',
-  //   groupTitle: false,
-  //   submenu: []
-  // },
-  // {
-  //   path: '/maestros/referencias',
-  //   title: 'Referencias',
-  //   moduleName: 'maestros',
-  //   icon: '',
-  //   class: 'ml-menu',
-  //   groupTitle: false,
-  //   submenu: []
-  // },
-  // {
-  //   path: '/maestros/color',
-  //   title: 'Color',
-  //   moduleName: 'maestros',
-  //   icon: '',
-  //   class: 'ml-menu',
-  //   groupTitle: false,
-  //   submenu: []
-  // },
   {
     path: '/maestros/cuentaPorCobrar',
     title: 'Cuenta por cobrar',
@@ -119,14 +101,5 @@ export const ROUTES: RouteInfo[] = [
     groupTitle: false,
     submenu: []
   },
-
-  // {
-  //   path: '/inboxDespacho',
-  //   title: 'Inbox despacho',
-  //   moduleName: 'inbox despacho',
-  //   icon: 'far fa-file-alt',
-  //   class: '',
-  //   groupTitle: false,
-  //   submenu: []
-  // }
+ 
 ];

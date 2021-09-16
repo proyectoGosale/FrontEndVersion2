@@ -42,6 +42,11 @@ import { CrudProductosComponent } from './productos/crud-productos/crud-producto
 import { FormCrudProductosComponent } from './productos/crud-productos/form-crud-productos/form-crud-productos.component';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { FormCategoriasComponent } from './categorias/form-categorias/form-categorias.component';
+import { ModalVisitasComponent } from './visitas/modal-visitas/modal-visitas.component';
+import { CategoriaComponent } from './categoria/categoria.component';
+import { FormCategoriaComponent } from './categoria/form-categoria/form-categoria.component';
+import { CompaniaComponent } from './compania/compania.component';
+import { FormCompaniaComponent } from './compania/form-compania/form-compania.component';
 
 
 
@@ -68,6 +73,11 @@ import { FormCategoriasComponent } from './categorias/form-categorias/form-categ
     FormCrudProductosComponent,
     CategoriasComponent,
     FormCategoriasComponent,
+    ModalVisitasComponent,
+    CategoriaComponent,
+    FormCategoriaComponent,
+    CompaniaComponent,
+    FormCompaniaComponent,
   ],
   imports: [
     CommonModule,

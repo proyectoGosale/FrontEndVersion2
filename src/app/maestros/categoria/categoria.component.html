@@ -1,3 +1,4 @@
+<p>categoria works!</p>
 <section class="content">
     <div class="container-fluid">
         <div class="block-header">
@@ -19,7 +20,7 @@
                     <div class="row">
                         <div class="col-8">
                             <h2>
-                                <strong>Visitas</strong>
+                                <strong>Lista de categorias</strong>
                             </h2>
                         </div>
                         <div class="col-4">
@@ -40,27 +41,16 @@
 
                     <table mat-table [dataSource]="dataSource3" class="w-100 text-center">
                         <ng-container matColumnDef="id">
-                            <th mat-header-cell *matHeaderCellDef class="text-center"> Id visita </th>
+                            <th mat-header-cell *matHeaderCellDef class="text-center"> Id </th>
                             <td mat-cell *matCellDef="let element"> {{element.id}} </td>
                         </ng-container>
-                        <ng-container matColumnDef="cliente">
-                            <th mat-header-cell *matHeaderCellDef class="text-center"> Cliente </th>
-                            <td mat-cell *matCellDef="let element"> {{getClientes(element?.client_id)?.name}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="fecha">
-                            <th mat-header-cell *matHeaderCellDef class="text-center"> Fecha y hora </th>
-                            <td mat-cell *matCellDef="let element"> {{element.date_hour}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="estado">
-                            <th mat-header-cell *matHeaderCellDef class="text-center"> Estado </th>
-                            <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                        <ng-container matColumnDef="nombre">
+                            <th mat-header-cell *matHeaderCellDef class="text-center"> Nombre categoria </th>
+                            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
                         </ng-container>
                         <ng-container matColumnDef="accion">
                             <th mat-header-cell *matHeaderCellDef class="text-center"> Acciones </th>
                             <td mat-cell *matCellDef="let element">
-                                <button mat-stroked-button color="default" class="btn" (click)="openDialog(element.id)">
-                                    Detalles
-                                </button>
                                 <button mat-stroked-button color="default" class="btn"
                                     [routerLink]="['./form', element.id]">
                                     Editar

@@ -1,9 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { AlertService } from 'src/services/alert.service';
 import { ClientesService } from 'src/services/clientes.service';
 import { VisitasService } from 'src/services/visitas.service';
 import Swal from 'sweetalert2';
+import { ModalVisitasComponent } from './modal-visitas/modal-visitas.component';
+
+export interface DialogData {
+  name: string;
+  id: number;
+}
 
 @Component({
   selector: 'app-visitas',
@@ -20,18 +27,45 @@ export class VisitasComponent implements OnInit {
     'accion'
   ];
 
+  name: string = "hola mundo"
+  id: number = 1
+
   listClientes: any[] = [];
   dataSource3 = new MatTableDataSource([]);
 
   constructor(
     private clientesService: ClientesService,
     private visitasService: VisitasService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
     this.getData();
     this.getObtenerClientes();
+  }
+
+  openDialog(id): void {
+    this.alertService.showLoading();
+    this.visitasService.getById(id).subscribe(resp => {
+      this.alertService.hideSwal();
+      let nameCliente = resp.data.client_id;
+      let observation = resp.data.observations;
+      console.log(this.name);
+      
+      const dialogRef = this.dialog.open(ModalVisitasComponent, {
+        width: '250px',
+        data: {
+          nombreCliente: nameCliente,
+          observaciones: observation
+        }
+      });
+      dialogRef.afterOpened().subscribe(result => {
+        console.log(`Dialog result: ${result}`);
+      });
+    })
+
+  
   }
 
   async getObtenerClientes() {

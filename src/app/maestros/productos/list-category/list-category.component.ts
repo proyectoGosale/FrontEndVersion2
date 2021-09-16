@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, mergeMap } from 'rxjs/operators';
-import { RightSidebarComponent } from 'src/app/layout/right-sidebar/right-sidebar.component';
 import { AlertService } from 'src/services/alert.service';
+import { CategoriaPorIdService } from 'src/services/categoria-por-id.service';
 import { CategoriasService } from 'src/services/categorias.service';
 import Swal from 'sweetalert2';
 
@@ -17,7 +17,7 @@ export class ListCategoryComponent implements OnInit {
   currentId = 0;
 
   constructor(
-    private categoriasService: CategoriasService,
+    private categoriaPorIdService: CategoriaPorIdService,
     private alertService: AlertService,
     private router: Router,
     private route: ActivatedRoute
@@ -36,7 +36,7 @@ export class ListCategoryComponent implements OnInit {
       filter(params => params.id > 0),
       mergeMap((params) => {
         this.alertService.showLoading();
-        return this.categoriasService.getById(this.currentId)
+        return this.categoriaPorIdService.getById(this.currentId)
       }
       )).subscribe((param) => {
         this.categorias = param.data
@@ -56,7 +56,7 @@ export class ListCategoryComponent implements OnInit {
 
     }).then((response) => {
       if (!response.dismiss) {
-        this.categoriasService.delete(id).subscribe(res => {
+        this.categoriaPorIdService.delete(id).subscribe(res => {
           this.getData();
         }, (err) => {
           this.alertService.showError()

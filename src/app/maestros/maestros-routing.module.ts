@@ -1,11 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CategoriaComponent } from './categoria/categoria.component';
+import { FormCategoriaComponent } from './categoria/form-categoria/form-categoria.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { FormClientesComponent } from './clientes/form-clientes/form-clientes.component';
+import { CompaniaComponent } from './compania/compania.component';
+import { FormCompaniaComponent } from './compania/form-compania/form-compania.component';
 import { FacturasComponent } from './facturas/facturas.component';
 import { FormFacturasComponent } from './facturas/form-facturas/form-facturas.component';
 import { CrudProductosComponent } from './productos/crud-productos/crud-productos.component';
 import { FormCrudProductosComponent } from './productos/crud-productos/form-crud-productos/form-crud-productos.component';
+import { FormProductosComponent } from './productos/form-productos/form-productos.component';
 import { ListCategoryComponent } from './productos/list-category/list-category.component';
 import { ProductosComponent } from './productos/productos.component';
 import { ReferenciasFormComponent } from './referencias/referencias-form/referencias-form.component';
@@ -81,6 +86,19 @@ const routes: Routes = [
         ]
     },
     {
+        path: 'categorias',
+        children: [
+            {
+                path: '',
+                component: CategoriaComponent
+            },
+            {
+                path: 'form/:id',
+                component: FormCategoriaComponent
+            }
+        ]
+    },
+    {
         path: 'vendedores',
         children: [
             {
@@ -115,7 +133,16 @@ const routes: Routes = [
             },
             {
                 path: 'listCategory/:id',
-                component: ListCategoryComponent
+                children: [
+                    {
+                        path: '',
+                        component: ListCategoryComponent
+                    },
+                    {
+                        path: 'form/:id',
+                        component: FormProductosComponent
+                    }
+                ]
             },
             {
                 path: 'listProductos',
@@ -143,6 +170,19 @@ const routes: Routes = [
             {
                 path: 'form/:id',
                 component: FormFacturasComponent
+            },
+        ]
+    },
+    {
+        path: 'compania',
+        children: [
+            {
+                path: '',
+                component: CompaniaComponent
+            },
+            {
+                path: 'form/:id',
+                component: FormCompaniaComponent
             },
         ]
     },

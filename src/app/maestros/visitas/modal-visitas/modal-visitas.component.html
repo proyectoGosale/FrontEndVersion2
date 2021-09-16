@@ -1,0 +1,57 @@
+<h2 mat-dialog-title># Id {{data?.nombreCliente}} {{getClientes(data?.nombreCliente)}}</h2>
+<mat-dialog-content class="mat-typography">
+    <form class="m-4">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Cliente</mat-label>
+                    <input matInput disabled [value]="getClientes(data.nombreCliente)">
+                </mat-form-field>
+            </div>
+        </div>
+        <!-- <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Nombre contacto </mat-label>
+                    <input matInput disabled [value]="data.name">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Telefono</mat-label>
+                    <input matInput disabled [value]="data.name">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Dirección</mat-label>
+                    <input matInput disabled [value]="data.name">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Vendedor</mat-label>
+                    <input matInput disabled [value]="data.name">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Observaciones</mat-label>
+                    <textarea matInput rows="4" disabled [value]="data.name"></textarea>
+                </mat-form-field>
+            </div>
+        </div> -->
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>
+

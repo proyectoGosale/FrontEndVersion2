@@ -19,21 +19,18 @@
                     <div class="row">
                         <div class="col-8">
                             <h2>
-                                <strong>Productos</strong>
+                                <strong>Categorias</strong>
                             </h2>
                         </div>
                     </div>
                 </div>
                 <div class="row px-5">
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 mb-5" *ngFor="let categories of categorias" >
-                        <mat-card class="example-card">
+                        <mat-card class="example-card" [routerLink]="['./listCategory/',categories.id]" style="cursor: pointer;">
                             <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu" class="m-0">
                             <mat-card-content class="mb-1">
-                                <mat-card-title class="card-text text-center mt-2">{{categories.name}}</mat-card-title>
+                                <mat-card-title class="card-text text-center mt-2" style="font-size: 20px;">{{categories.name}}</mat-card-title>
                             </mat-card-content>
-                            <mat-card-actions class="text-center mb-2">
-                              <button mat-flat-button color="primary" class="btn w-100" [routerLink]="['./listCategory/',categories.id]">Ver</button>
-                            </mat-card-actions>
                           </mat-card>
                     </div>
                    
