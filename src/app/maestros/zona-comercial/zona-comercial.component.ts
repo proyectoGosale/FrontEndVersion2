@@ -30,8 +30,8 @@ export class ZonaComercialComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getData();
     this.obtenerVendedores();
+    this.getData();
   }
 
   private getData() {
@@ -39,7 +39,6 @@ export class ZonaComercialComponent implements OnInit {
     this.zonaService.getAll().subscribe((res) => {
       this.dataSource3.data = res.data;
       this.alertService.hideSwal();
-
     }, (err) => {
 
     });

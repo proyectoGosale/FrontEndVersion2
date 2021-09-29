@@ -62,7 +62,18 @@
                                     </mat-form-field>
                                 </div>
                             </div>
-
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Nit</mat-label>
+                                        <input matInput formControlName="nit" required>
+                                        <mat-icon matSuffix>work_outline</mat-icon>
+                                        <mat-error *ngIf="form.get('nit').hasError('required')">
+                                            Nombre es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <mat-form-field class="example-full-width">

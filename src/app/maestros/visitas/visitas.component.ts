@@ -51,13 +51,15 @@ export class VisitasComponent implements OnInit {
       this.alertService.hideSwal();
       let nameCliente = resp.data.client_id;
       let observation = resp.data.observations;
+      let idVendedor = resp.data.user_id;
       console.log(this.name);
       
       const dialogRef = this.dialog.open(ModalVisitasComponent, {
-        width: '250px',
+        width: '600px',
         data: {
           nombreCliente: nameCliente,
-          observaciones: observation
+          observaciones: observation,
+          vendedor: idVendedor
         }
       });
       dialogRef.afterOpened().subscribe(result => {
@@ -68,10 +70,12 @@ export class VisitasComponent implements OnInit {
   
   }
 
-  async getObtenerClientes() {
-    let clientes = await this.clientesService.getAll().toPromise();
-    this.listClientes = clientes.data;
-    console.log(this.listClientes)
+  getObtenerClientes() {
+    this.alertService.showLoading();
+    this.clientesService.getAll().subscribe(resp => {
+      this.listClientes = resp.data;
+      this.alertService.hideSwal();
+    });
   }
 
   getClientes(idClient) {
@@ -79,10 +83,8 @@ export class VisitasComponent implements OnInit {
   }
 
   private getData() {
-    this.alertService.showLoading();
     this.visitasService.getAll().subscribe((res) => {
       this.dataSource3.data = res.data;
-      this.alertService.hideSwal();
     }, (err) => {
 
     });

@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class FormProductosComponent implements OnInit {
 
+  producto: any[] = [];
   currentId = 0;
   constructor(
     private fb: FormBuilder,
@@ -26,12 +27,15 @@ export class FormProductosComponent implements OnInit {
     this.route.params.subscribe(resp => {
       this.currentId = resp.id
     })
-  }
-
-  getData() {
-    this.productosService.getAll().subscribe(resp => {
-      console.log(resp.data);
-      
+    this.route.params.pipe(
+      filter(params => params.id > 0),
+      mergeMap((params) => {
+        this.alertService.showLoading();
+          return this.productosService.getById(params.id)
+        }
+      )).subscribe((producto) => {
+        this.producto.push(producto.data)
+        this.alertService.hideSwal();
     })
   }
 

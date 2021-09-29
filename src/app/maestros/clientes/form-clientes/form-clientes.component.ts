@@ -84,7 +84,8 @@ export class FormClientesComponent implements OnInit {
       neighborhood: ['', Validators.required],
       street: ['', Validators.required],
       number: ['', Validators.required],
-      contact_name: ['', Validators.required]
+      contact_name: ['', Validators.required],
+      nit: ['', Validators.required]
     })
   }
 

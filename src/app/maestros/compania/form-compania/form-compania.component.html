@@ -30,11 +30,17 @@
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <mat-form-field class="example-full-width">
                                         <mat-label>Nombre de compañia</mat-label>
-                                        <input matInput formControlName="business_name" required>
+                                        <input disabled [value]="categorias?.business_name" matInput >                                        
                                         <mat-icon matSuffix>work_outline</mat-icon>
-                                        <mat-error *ngIf="form.get('business_name').hasError('required')">
-                                            Nombre de compañia es requerido
-                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Nit</mat-label>
+                                        <input disabled matInput [value]="categorias?.nit" >
+                                        <mat-icon matSuffix>work_outline</mat-icon>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -46,18 +52,6 @@
                                         <mat-icon matSuffix>work_outline</mat-icon>
                                         <mat-error *ngIf="form.get('email').hasError('required')">
                                             Email es requerido
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
-                                    <mat-form-field class="example-full-width">
-                                        <mat-label>Nit</mat-label>
-                                        <input matInput formControlName="nit" required>
-                                        <mat-icon matSuffix>work_outline</mat-icon>
-                                        <mat-error *ngIf="form.get('nit').hasError('required')">
-                                            Nit es requerido
                                         </mat-error>
                                     </mat-form-field>
                                 </div>

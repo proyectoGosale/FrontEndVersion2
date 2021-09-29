@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 export class FormCompaniaComponent implements OnInit {
 
   listCategory: any[] = [];
+  categorias:any[] = [];
   form: FormGroup;
   currentId = 0;
   constructor(
@@ -35,12 +36,13 @@ export class FormCompaniaComponent implements OnInit {
         this.alertService.showLoading();
           return this.companiaService.getById(params.id)
         }
-      )).subscribe((categoria) => {
-        console.log(categoria);
-        
+      )).subscribe((categoria:any) => {
+        this.categorias = categoria.data
         let categorias = categoria.data
         this.form.patchValue(categorias);
         this.alertService.hideSwal();
+        console.log(this.categorias);
+        
     })
   }
 
@@ -65,8 +67,6 @@ export class FormCompaniaComponent implements OnInit {
 
   buildForm() {
     this.form = this.fb.group({
-      business_name: ['', Validators.required],
-      nit: ['', Validators.required],
       email: ['', Validators.required],
       phone: ['', Validators.required],
       address: ['', Validators.required],
