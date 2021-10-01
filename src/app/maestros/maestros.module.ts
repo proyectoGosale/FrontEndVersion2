@@ -47,6 +47,16 @@ import { CategoriaComponent } from './categoria/categoria.component';
 import { FormCategoriaComponent } from './categoria/form-categoria/form-categoria.component';
 import { CompaniaComponent } from './compania/compania.component';
 import { FormCompaniaComponent } from './compania/form-compania/form-compania.component';
+import { CuentasPorCobrarComponent } from './cuentas-por-cobrar/cuentas-por-cobrar.component';
+import { NotasDeCreditoComponent } from './notas-de-credito/notas-de-credito.component';
+import { DevolucionesComponent } from './devoluciones/devoluciones.component';
+import { CotizacionComponent } from './cotizacion/cotizacion.component';
+import { OrdenPedidoComponent } from './orden-pedido/orden-pedido.component';
+import { FormCuentasPorCobrarComponent } from './cuentas-por-cobrar/form-cuentas-por-cobrar/form-cuentas-por-cobrar.component';
+import { FormNotasCreditoComponent } from './notas-de-credito/form-notas-credito/form-notas-credito.component';
+import { FormDevolucionesComponent } from './devoluciones/form-devoluciones/form-devoluciones.component';
+import { FormCotizacionComponent } from './cotizacion/form-cotizacion/form-cotizacion.component';
+import { FormOrdenPedidoComponent } from './orden-pedido/form-orden-pedido/form-orden-pedido.component';
 
 
 
@@ -78,6 +88,16 @@ import { FormCompaniaComponent } from './compania/form-compania/form-compania.co
     FormCategoriaComponent,
     CompaniaComponent,
     FormCompaniaComponent,
+    CuentasPorCobrarComponent,
+    NotasDeCreditoComponent,
+    DevolucionesComponent,
+    CotizacionComponent,
+    OrdenPedidoComponent,
+    FormCuentasPorCobrarComponent,
+    FormNotasCreditoComponent,
+    FormDevolucionesComponent,
+    FormCotizacionComponent,
+    FormOrdenPedidoComponent,
   ],
   imports: [
     CommonModule,

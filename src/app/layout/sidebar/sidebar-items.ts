@@ -84,7 +84,7 @@ export const ROUTES: RouteInfo[] = [
     submenu: []
   },
   {
-    path: '/maestros/cuentaPorCobrar',
+    path: '/maestros/cuentasXCobrar',
     title: 'Cuenta por cobrar',
     moduleName: 'cuentasPorCobrar',
     icon: 'far fa-file-alt',
@@ -101,5 +101,40 @@ export const ROUTES: RouteInfo[] = [
     groupTitle: false,
     submenu: []
   },
- 
+  {
+    path: '/maestros/devoluciones',
+    title: 'Devoluciones',
+    moduleName: 'devoluciones',
+    icon: 'far fa-file-alt',
+    class: '',
+    groupTitle: false,
+    submenu: []
+  },
+  {
+    path: '/maestros/notasDeCredito',
+    title: 'Notas de credito',
+    moduleName: 'notasCredito',
+    icon: 'far fa-file-alt',
+    class: '',
+    groupTitle: false,
+    submenu: []
+  },
+  {
+    path: '/maestros/cotizaciones',
+    title: 'Cotizaciones',
+    moduleName: 'cotizaciones',
+    icon: 'far fa-file-alt',
+    class: '',
+    groupTitle: false,
+    submenu: []
+  },
+  {
+    path: '/maestros/ordenPedido',
+    title: 'Orden de pedido',
+    moduleName: 'ordenPedido',
+    icon: 'far fa-file-alt',
+    class: '',
+    groupTitle: false,
+    submenu: []
+  }, 
 ];

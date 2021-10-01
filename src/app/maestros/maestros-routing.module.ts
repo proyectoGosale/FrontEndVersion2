@@ -6,8 +6,18 @@ import { ClientesComponent } from './clientes/clientes.component';
 import { FormClientesComponent } from './clientes/form-clientes/form-clientes.component';
 import { CompaniaComponent } from './compania/compania.component';
 import { FormCompaniaComponent } from './compania/form-compania/form-compania.component';
+import { CotizacionComponent } from './cotizacion/cotizacion.component';
+import { FormCotizacionComponent } from './cotizacion/form-cotizacion/form-cotizacion.component';
+import { CuentasPorCobrarComponent } from './cuentas-por-cobrar/cuentas-por-cobrar.component';
+import { FormCuentasPorCobrarComponent } from './cuentas-por-cobrar/form-cuentas-por-cobrar/form-cuentas-por-cobrar.component';
+import { DevolucionesComponent } from './devoluciones/devoluciones.component';
+import { FormDevolucionesComponent } from './devoluciones/form-devoluciones/form-devoluciones.component';
 import { FacturasComponent } from './facturas/facturas.component';
 import { FormFacturasComponent } from './facturas/form-facturas/form-facturas.component';
+import { FormNotasCreditoComponent } from './notas-de-credito/form-notas-credito/form-notas-credito.component';
+import { NotasDeCreditoComponent } from './notas-de-credito/notas-de-credito.component';
+import { FormOrdenPedidoComponent } from './orden-pedido/form-orden-pedido/form-orden-pedido.component';
+import { OrdenPedidoComponent } from './orden-pedido/orden-pedido.component';
 import { CrudProductosComponent } from './productos/crud-productos/crud-productos.component';
 import { FormCrudProductosComponent } from './productos/crud-productos/form-crud-productos/form-crud-productos.component';
 import { FormProductosComponent } from './productos/form-productos/form-productos.component';
@@ -183,6 +193,71 @@ const routes: Routes = [
             {
                 path: 'form/:id',
                 component: FormCompaniaComponent
+            },
+        ]
+    },
+    {
+        path: 'cuentasXCobrar',
+        children: [
+            {
+                path: '',
+                component: CuentasPorCobrarComponent
+            },
+            {
+                path: 'form/:id',
+                component: FormCuentasPorCobrarComponent
+            },
+        ]
+    },
+    {
+        path: 'notasDeCredito',
+        children: [
+            {
+                path: '',
+                component: NotasDeCreditoComponent
+            },
+            {
+                path: 'form/:id',
+                component: FormNotasCreditoComponent
+            },
+        ]
+    },
+    {
+        path: 'devoluciones',
+        children: [
+            {
+                path: '',
+                component: DevolucionesComponent
+            },
+            {
+                path: 'form/:id',
+                component: FormDevolucionesComponent
+            },
+        ]
+    },
+    {
+        path: 'cotizaciones',
+        children: [
+            {
+                path: '',
+                component: CotizacionComponent
+            },
+            {
+                path: 'form/:id',
+                component: FormCotizacionComponent
+            },
+        ]
+    },
+    {
+        path: 'ordenPedido',
+        children: [
+            {
+                path: '',
+                component: OrdenPedidoComponent
+            },
+            {
+                path: 'form/:id',
+                component: FormOrdenPedidoComponent
             },
         ]
     },
