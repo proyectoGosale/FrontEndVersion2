@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { AlertService } from 'src/services/alert.service';
 import { ClientesService } from 'src/services/clientes.service';
+import { CuentasPorCobrarService } from 'src/services/cuentas-por-cobrar.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -13,16 +14,16 @@ export class CuentasPorCobrarComponent implements OnInit {
 
   displayedColumns: string[] = [
     'id',
-    'cliente',
-    'phone',
-    'payment_terms',
+    'date',
+    'estado',
+    'valor',
     'accion'
   ];
 
   dataSource3 = new MatTableDataSource([]);
 
   constructor(
-    private clientesService: ClientesService,
+    private cuentasPorCobrarService: CuentasPorCobrarService,
     private alertService: AlertService
   ) { }
 
@@ -32,7 +33,7 @@ export class CuentasPorCobrarComponent implements OnInit {
 
   private getData() {
     this.alertService.showLoading();
-    this.clientesService.getAll().subscribe((res) => {
+    this.cuentasPorCobrarService.getAll().subscribe((res) => {
       this.dataSource3.data = res.data;
       this.alertService.hideSwal();
     }, (err) => {
@@ -56,7 +57,7 @@ export class CuentasPorCobrarComponent implements OnInit {
 
     }).then((response) => {
       if (!response.dismiss) {
-        this.clientesService.delete(id).subscribe(res => {
+        this.cuentasPorCobrarService.delete(id).subscribe(res => {
           this.getData();
         }, (err) => {
           this.alertService.showError()

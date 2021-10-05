@@ -5,7 +5,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <ul class="breadcrumb breadcrumb-style ">
                         <li class="breadcrumb-item">
-                            <h4 class="page-title">Formulario Clientes</h4>
+                            <h4 class="page-title">Formulario cotización</h4>
                         </li>
                     </ul>
                 </div>
@@ -18,13 +18,26 @@
                         <div class="row">
                             <div class="col-8">
                                 <h2>
-                                    <strong>Cliente</strong>
+                                    <strong>Cotización</strong>
                                 </h2>
                             </div>
                         </div>
                     </div>
                     <div class="body">
                         <form class="m-4" [formGroup]="form" (ngSubmit)="submit()">
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Clientes</mat-label>
+                                        <mat-select formControlName="client_id" required>
+                                          <mat-option *ngFor="let clientes of listClientes" [value]="clientes.id">{{clientes.name}}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="form.get('client_id').hasError('required')">
+                                            Cliente es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <mat-form-field class="example-full-width">
@@ -41,11 +54,10 @@
                             <div class="row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <mat-form-field class="example-full-width">
-                                        <mat-label>Nombre cliente</mat-label>
-                                        <input matInput formControlName="name" required>
-                                        <mat-icon matSuffix>work_outline</mat-icon>
-                                        <mat-error *ngIf="form.get('name').hasError('required')">
-                                            Nombre es requerido
+                                        <mat-label>Fecha</mat-label>
+                                        <input matInput formControlName="date" type="date" required>
+                                        <mat-error *ngIf="form.get('date').hasError('required')">
+                                            Fecha es requerido
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
@@ -53,10 +65,32 @@
                             <div class="row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <mat-form-field class="example-full-width">
-                                        <mat-label>Telefono</mat-label>
-                                        <input matInput formControlName="phone" required>
+                                        <mat-label>Fecha de entrega</mat-label>
+                                        <input matInput formControlName="date_of_delivery" type="date" required>
+                                        <mat-error *ngIf="form.get('date_of_delivery').hasError('required')">
+                                            Fecha de entrega es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Fecha de vencimiento</mat-label>
+                                        <input matInput formControlName="due_date" type="date" required>
+                                        <mat-error *ngIf="form.get('due_date').hasError('required')">
+                                            Fecha de vencimiento es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Tipo de documento</mat-label>
+                                        <input disabled matInput value="Cotizacion" formControlName="document_type" required>
                                         <mat-icon matSuffix>work_outline</mat-icon>
-                                        <mat-error *ngIf="form.get('phone').hasError('required')">
+                                        <mat-error *ngIf="form.get('document_type').hasError('required')">
                                             Telefono es requerido
                                         </mat-error>
                                     </mat-form-field>
@@ -65,28 +99,48 @@
                             <div class="row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <mat-form-field class="example-full-width">
-                                        <mat-label>Nit</mat-label>
-                                        <input matInput formControlName="nit" required>
-                                        <mat-icon matSuffix>work_outline</mat-icon>
-                                        <mat-error *ngIf="form.get('nit').hasError('required')">
-                                            Nombre es requerido
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
-                                    <mat-form-field class="example-full-width">
-                                        <mat-label>Condiciones de pago</mat-label>
-                                        <mat-select formControlName="payment_terms" required>
-                                          <mat-option value="Contado">Contado</mat-option>
-                                          <mat-option value="15 dias">15 dias</mat-option>
-                                          <mat-option value="30 dias">30 dias</mat-option>
-                                          <mat-option value="45 dias">45 dias</mat-option>
-                                          <mat-option value="60 dias">60 dias</mat-option>
+                                        <mat-label>Estado</mat-label>
+                                        <mat-select formControlName="status" required>
+                                          <mat-option *ngFor="let status of listStatus" [value]="status.nombre">{{status.nombre}}</mat-option>
                                         </mat-select>
-                                        <mat-error *ngIf="form.get('payment_terms').hasError('required')">
-                                            Condiciones de pago es requerido
+                                        <mat-error *ngIf="form.get('status').hasError('required')">
+                                            Estado es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Cantidad</mat-label>
+                                        <input matInput formControlName="quantity" type="number" required>
+                                        <mat-icon matSuffix>work_outline</mat-icon>
+                                        <mat-error *ngIf="form.get('quantity').hasError('required')">
+                                            Cantidad es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Subtotal</mat-label>
+                                        <input matInput formControlName="subtotal" type="number" required>
+                                        <mat-icon matSuffix>work_outline</mat-icon>
+                                        <mat-error *ngIf="form.get('subtotal').hasError('required')">
+                                            Subtotal es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Descuento</mat-label>
+                                        <input matInput formControlName="discount" type="number" required>
+                                        <mat-icon matSuffix>work_outline</mat-icon>
+                                        <mat-error *ngIf="form.get('discount').hasError('required')">
+                                            Descuento es requerido
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
@@ -95,63 +149,23 @@
                             <div class="row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <mat-form-field class="example-full-width">
-                                        <mat-label>Nombre de contacto</mat-label>
-                                        <input matInput formControlName="contact_name" required>
+                                        <mat-label>Impuesto</mat-label>
+                                        <input matInput formControlName="tax" type="number" required>
                                         <mat-icon matSuffix>work_outline</mat-icon>
-                                        <mat-error *ngIf="form.get('contact_name').hasError('required')">
-                                            Nombre de contacto es requerido
+                                        <mat-error *ngIf="form.get('tax').hasError('required')">
+                                            Impuesto es requerido
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
                             </div>
-                            
                             <div class="row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <mat-form-field class="example-full-width">
-                                        <mat-label>Ciudad</mat-label>
-                                        <input matInput formControlName="city" required>
+                                        <mat-label>Total</mat-label>
+                                        <input matInput formControlName="total" type="number" required>
                                         <mat-icon matSuffix>work_outline</mat-icon>
-                                        <mat-error *ngIf="form.get('city').hasError('required')">
-                                            Ciudad es requerido
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
-                                    <mat-form-field class="example-full-width">
-                                        <mat-label>Barrio</mat-label>
-                                        <input matInput formControlName="neighborhood" required>
-                                        <mat-icon matSuffix>work_outline</mat-icon>
-                                        <mat-error *ngIf="form.get('neighborhood').hasError('required')">
-                                            Barrio es requerido
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
-                                    <mat-form-field class="example-full-width">
-                                        <mat-label>Calle</mat-label>
-                                        <input matInput formControlName="street" required>
-                                        <mat-icon matSuffix>work_outline</mat-icon>
-                                        <mat-error *ngIf="form.get('street').hasError('required')">
-                                            Calle es requerido
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
-                                    <mat-form-field class="example-full-width">
-                                        <mat-label>Numero dirección</mat-label>
-                                        <input matInput formControlName="number" required>
-                                        <mat-icon matSuffix>work_outline</mat-icon>
-                                        <mat-error *ngIf="form.get('number').hasError('required')">
-                                            Telefono es requerido
+                                        <mat-error *ngIf="form.get('total').hasError('required')">
+                                            Total es requerido
                                         </mat-error>
                                     </mat-form-field>
                                 </div>

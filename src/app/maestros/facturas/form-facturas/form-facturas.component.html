@@ -128,8 +128,7 @@
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <mat-form-field class="example-full-width">
                                         <mat-label>Fecha de entrega</mat-label>
-                                        <input matInput type="number" formControlName="date_of_delivery" required>
-                                        <mat-icon matSuffix>work_outline</mat-icon>
+                                        <input matInput type="datetime-local" formControlName="date_of_delivery" required>
                                         <mat-error *ngIf="form.get('date_of_delivery').hasError('required')">
                                             Fecha de entrega es requerido
                                         </mat-error>
@@ -176,8 +175,3 @@
 
     </div>
 </section>
-
-
-
-
-tax: 19

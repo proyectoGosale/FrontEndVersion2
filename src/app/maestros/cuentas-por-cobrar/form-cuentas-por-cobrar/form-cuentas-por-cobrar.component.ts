@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { filter, mergeMap } from 'rxjs/operators';
 import { AlertService } from 'src/services/alert.service';
 import { ClientesService } from 'src/services/clientes.service';
+import { CuentasPorCobrarService } from 'src/services/cuentas-por-cobrar.service';
 import { VendedoresService } from 'src/services/vendedores.service';
 import Swal from 'sweetalert2';
 
@@ -14,6 +15,20 @@ import Swal from 'sweetalert2';
 })
 export class FormCuentasPorCobrarComponent implements OnInit {
 
+  listStatus: any[] = [
+    {
+      nombre: 'Elaborado'
+    },
+    {
+      nombre: 'Preaprobado'
+    },
+    {
+      nombre: 'Aprobado'
+    },
+    {
+      nombre: 'Cancelado'
+    }
+  ]
   vendedor: any[] = [];
   listVendedores: any[] = [];
   idPorCliente = 0;
@@ -25,7 +40,7 @@ export class FormCuentasPorCobrarComponent implements OnInit {
     private alertService: AlertService,
     private route: ActivatedRoute,
     private clientesService: ClientesService,
-    private vendedoresService: VendedoresService
+    private cuentasPorCobrarService: CuentasPorCobrarService
   ) { }
 
   ngOnInit(): void {
@@ -35,7 +50,7 @@ export class FormCuentasPorCobrarComponent implements OnInit {
       filter(params => params.id > 0),
       mergeMap((params) => {
         this.alertService.showLoading();
-          return this.clientesService.getById(params.id)
+          return this.cuentasPorCobrarService.getById(params.id)
         }
       )).subscribe((cliente) => {
         let clientes = cliente.data
@@ -47,7 +62,7 @@ export class FormCuentasPorCobrarComponent implements OnInit {
 
   getVendedores() {
     this.alertService.showLoading();
-    this.vendedoresService.getAll().subscribe(resp => {
+    this.cuentasPorCobrarService.getAll().subscribe(resp => {
       this.listVendedores = resp.data;
       this.alertService.hideSwal();
     })
@@ -59,15 +74,15 @@ export class FormCuentasPorCobrarComponent implements OnInit {
       this.alertService.showLoading();
       item.id = this.currentId;
       if (this.currentId > 0) {
-        this.clientesService.update2(this.currentId, item).subscribe((res) => {
+        this.cuentasPorCobrarService.update2(this.currentId, item).subscribe((res) => {
           this.alertService.showSuccess();
-          this.router.navigate(['./maestros/clientes'])
+          this.router.navigate(['./maestros/cuentasXCobrar'])
         });
       } else {
-        this.clientesService.save(item).subscribe((res) => {
+        this.cuentasPorCobrarService.save(item).subscribe((res) => {
           this.idPorCliente = res.id
           this.alertService.showClienteCreado();
-          this.router.navigate(['./maestros/clientes'])
+          this.router.navigate(['./maestros/cuentasXCobrar'])
         });
       }
     } else {
@@ -76,16 +91,10 @@ export class FormCuentasPorCobrarComponent implements OnInit {
 
   buildForm() {
     this.form = this.fb.group({
-      user_id: ['', Validators.required],
-      name: ['', Validators.required],
-      phone: ['', Validators.required],
-      payment_terms: ['', Validators.required],
-      city: ['', Validators.required],
-      neighborhood: ['', Validators.required],
-      street: ['', Validators.required],
-      number: ['', Validators.required],
-      contact_name: ['', Validators.required],
-      nit: ['', Validators.required]
+      date: ['', Validators.required],
+      value: ['', Validators.required],
+      status: ['', Validators.required],
+      days_expire: ['', Validators.required],
     })
   }
 
@@ -100,7 +109,7 @@ export class FormCuentasPorCobrarComponent implements OnInit {
 
     }).then((response) => {
       if (!response.dismiss) {
-        this.router.navigate(['./maestros/clientes'])
+        this.router.navigate(['./maestros/cuentasXCobrar'])
       }
     })
   }

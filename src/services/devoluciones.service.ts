@@ -1,9 +1,15 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AppService } from './app.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DevolucionesService {
+export class DevolucionesService extends AppService{
 
-  constructor() { }
+  httpClient: HttpClient
+
+  constructor(httpClient: HttpClient) {
+    super(httpClient, 'refund')
+   }
 }

@@ -94,6 +94,14 @@ export class AlertService {
     });
   }
 
+  showErrorNoSeCargaMasDeUnArchivo() {
+    return Swal.fire({
+      title: 'Error',
+      text: 'No se puede Mas de 1 imagen, si desea cambiarlo elimine el existente y vuelva a intentarlo',
+      icon: 'error'
+    });
+  }
+
   showCerrarOrdenWarning() {
     return Swal.fire({
       title: 'Atencion',

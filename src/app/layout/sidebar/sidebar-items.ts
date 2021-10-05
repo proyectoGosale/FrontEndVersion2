@@ -92,15 +92,15 @@ export const ROUTES: RouteInfo[] = [
     groupTitle: false,
     submenu: []
   },
-  {
-    path: '/maestros/estadisticas',
-    title: 'Estadisticas de venta',
-    moduleName: 'estadisticas',
-    icon: 'far fa-file-alt',
-    class: '',
-    groupTitle: false,
-    submenu: []
-  },
+  // {
+  //   path: '/maestros/estadisticas',
+  //   title: 'Estadisticas de venta',
+  //   moduleName: 'estadisticas',
+  //   icon: 'far fa-file-alt',
+  //   class: '',
+  //   groupTitle: false,
+  //   submenu: []
+  // },
   {
     path: '/maestros/devoluciones',
     title: 'Devoluciones',

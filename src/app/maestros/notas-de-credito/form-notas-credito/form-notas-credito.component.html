@@ -1,1 +1,93 @@
-<p>form-notas-credito works!</p>
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="breadcrumb breadcrumb-style ">
+                        <li class="breadcrumb-item">
+                            <h4 class="page-title">Formulario cuentas por cobrar</h4>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <div class="row">
+                            <div class="col-8">
+                                <h2>
+                                    <strong>Cuentas por cobrar</strong>
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="body">
+                        <form class="m-4" [formGroup]="form" (ngSubmit)="submit()">
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Facturas</mat-label>
+                                        <mat-select formControlName="document_id" required>
+                                          <mat-option *ngFor="let item of facturas" [value]="item.id"><strong>id:</strong> {{item?.id}} <strong>cliente:</strong> {{getClientes(item?.client_id)?.name}}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="form.get('document_id').hasError('required')">
+                                            Facturas es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Concepto</mat-label>
+                                        <textarea formControlName="concept" required matInput></textarea>
+                                        <mat-icon matSuffix>work_outline</mat-icon>
+                                        <mat-error *ngIf="form.get('concept').hasError('required')">
+                                            Concepto es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Descontar valor</mat-label>
+                                        <input matInput type="number" formControlName="discounted_value" required>
+                                        <mat-icon matSuffix>work_outline</mat-icon>
+                                        <mat-error *ngIf="form.get('discounted_value').hasError('required')">
+                                            Descontar valor es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Estado</mat-label>
+                                        <mat-select formControlName="status" required>
+                                          <mat-option *ngFor="let item of descontarValor" [value]="item.nombre">{{item.nombre}}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="form.get('status').hasError('required')">
+                                            Estado es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <button class="mr-3" [disabled]="!form.valid" mat-raised-button
+                                        color="primary">Guardar</button>
+                                    <button type="button" (click)="cancel()" mat-button>Cancelar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

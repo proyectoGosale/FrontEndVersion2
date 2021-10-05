@@ -17,6 +17,7 @@ export class FormCrudProductosComponent implements OnInit {
   listCategory: any[] = [];
   form: FormGroup;
   currentId = 0;
+  public imagenes: any[] = [];
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -28,6 +29,7 @@ export class FormCrudProductosComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildForm();
+    this.onChanges();
     this.getCategorias();
     this.route.params.subscribe(params => {
       this.currentId=params.id
@@ -39,7 +41,8 @@ export class FormCrudProductosComponent implements OnInit {
           return this.productosService.getById(params.id)
         }
       )).subscribe((producto) => {
-        let productos = producto.data
+        let productos = producto.data;
+        this.imagenes.push({ archivo: productos.image});
         this.form.patchValue(productos);
         this.alertService.hideSwal();
     })
@@ -56,6 +59,7 @@ export class FormCrudProductosComponent implements OnInit {
   submit() {
     if (this.form.valid) {
       let item = this.form.value;
+      item.image = this.imagenes[0].archivo;
       this.alertService.showLoading();
       if (this.currentId > 0) {
         this.productosService.update2(this.currentId, item).subscribe((res) => {
@@ -72,6 +76,24 @@ export class FormCrudProductosComponent implements OnInit {
     }
   }
 
+  onChanges() {
+    this.form.get('image').valueChanges.subscribe(response => {
+      if (this.imagenes.length == 0) {
+        if (response?.files) {
+          this.productosService.convertFile(response?.files[0]).then((stringImg => {
+            this.imagenes.push({ archivo: stringImg, id: 0, nombre: response.files[0].name });
+            this.form.get('image').setValue('', { emitEvent: false });
+            console.log(this.imagenes);
+            
+          }));
+        }
+      } else {
+        this.alertService.showErrorNoSeCargaMasDeUnArchivo();
+      }
+    });
+  }
+
+
   buildForm() {
     this.form = this.fb.group({
       reference: ['', Validators.required],
@@ -80,8 +102,26 @@ export class FormCrudProductosComponent implements OnInit {
       dimension: ['', Validators.required],
       description: ['', Validators.required],
       category_id: ['', Validators.required],
-      available: ['', Validators.required]
+      available: ['', Validators.required],
+      image: ['']
     })
+  }
+
+  removeImage(doc, ix) {
+    Swal.fire({
+      title: 'Atencion',
+      text: 'Se perderan los cambios no guardados,¿Seguro?',
+      icon: 'question',
+      cancelButtonText: 'No',
+      confirmButtonText: 'Si, continuar',
+      showCancelButton: true
+
+    }).then((response) => {
+      if (!response.dismiss) {
+        this.imagenes.splice(ix, 1);
+      }
+    })
+
   }
 
   cancel() {

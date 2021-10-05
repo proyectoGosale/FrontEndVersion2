@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { filter, mergeMap } from 'rxjs/operators';
 import { AlertService } from 'src/services/alert.service';
 import { ClientesService } from 'src/services/clientes.service';
+import { CotizacionService } from 'src/services/cotizacion.service';
 import { VendedoresService } from 'src/services/vendedores.service';
 import Swal from 'sweetalert2';
 
@@ -14,7 +15,22 @@ import Swal from 'sweetalert2';
 })
 export class FormCotizacionComponent implements OnInit {
 
+  listStatus: any[] = [
+    {
+      nombre: 'Elaborado'
+    },
+    {
+      nombre: 'Preaprobado'
+    },
+    {
+      nombre: 'Aprobado'
+    },
+    {
+      nombre: 'Cancelado'
+    }
+  ]
   vendedor: any[] = [];
+  listClientes: any[] = [];
   listVendedores: any[] = [];
   idPorCliente = 0;
   form: FormGroup;
@@ -24,24 +40,34 @@ export class FormCotizacionComponent implements OnInit {
     private router: Router,
     private alertService: AlertService,
     private route: ActivatedRoute,
+    private cotizacionService: CotizacionService,
     private clientesService: ClientesService,
     private vendedoresService: VendedoresService
   ) { }
 
   ngOnInit(): void {
     this.buildForm();
+    this.getClientes();
     this.getVendedores();
     this.route.params.pipe(
       filter(params => params.id > 0),
       mergeMap((params) => {
         this.alertService.showLoading();
-          return this.clientesService.getById(params.id)
+          return this.cotizacionService.getById(params.id)
         }
       )).subscribe((cliente) => {
         let clientes = cliente.data
         this.form.patchValue(clientes);
         this.currentId = clientes.id;
         this.alertService.hideSwal();
+    })
+  }
+
+  getClientes() {
+    this.alertService.showLoading();
+    this.clientesService.getAll().subscribe(resp => {
+      this.listClientes = resp.data;
+      this.alertService.hideSwal();
     })
   }
 
@@ -53,18 +79,20 @@ export class FormCotizacionComponent implements OnInit {
     })
   }
 
+
+
   submit() {
     if (this.form.valid) {
       let item = this.form.value;
       this.alertService.showLoading();
       item.id = this.currentId;
       if (this.currentId > 0) {
-        this.clientesService.update2(this.currentId, item).subscribe((res) => {
+        this.cotizacionService.update2(this.currentId, item).subscribe((res) => {
           this.alertService.showSuccess();
           this.router.navigate(['./maestros/clientes'])
         });
       } else {
-        this.clientesService.save(item).subscribe((res) => {
+        this.cotizacionService.save(item).subscribe((res) => {
           this.idPorCliente = res.id
           this.alertService.showClienteCreado();
           this.router.navigate(['./maestros/clientes'])
@@ -76,16 +104,18 @@ export class FormCotizacionComponent implements OnInit {
 
   buildForm() {
     this.form = this.fb.group({
+      client_id: ['', Validators.required],
       user_id: ['', Validators.required],
-      name: ['', Validators.required],
-      phone: ['', Validators.required],
-      payment_terms: ['', Validators.required],
-      city: ['', Validators.required],
-      neighborhood: ['', Validators.required],
-      street: ['', Validators.required],
-      number: ['', Validators.required],
-      contact_name: ['', Validators.required],
-      nit: ['', Validators.required]
+      date: ['', Validators.required],
+      date_of_delivery: ['', Validators.required],
+      due_date: ['', Validators.required],
+      document_type: ['Cotizacion', Validators.required],
+      status: ['', Validators.required],
+      quantity: ['', Validators.required],
+      subtotal: ['', Validators.required],
+      discount: ['', Validators.required],
+      tax: ['', Validators.required],
+      total: ['', Validators.required]
     })
   }
 

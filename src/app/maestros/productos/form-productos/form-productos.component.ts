@@ -39,19 +39,8 @@ export class FormProductosComponent implements OnInit {
     })
   }
 
-  cancel() {
-    Swal.fire({
-      title: 'Atencion',
-      text: 'Se perderan los cambios no guardados,¿Seguro?',
-      icon: 'question',
-      cancelButtonText: 'No',
-      confirmButtonText: 'Si, continuar',
-      showCancelButton: true
-    }).then((response) => {
-      if (!response.dismiss) {
-        this.router.navigate(['./maestros/vendedores'])
-      }
-    })
+  ok() {
+    this.router.navigate(['./maestros/productos'])
   }
 
 }
