@@ -17,6 +17,7 @@ export class FormCategoriaComponent implements OnInit {
   listCategory: any[] = [];
   form: FormGroup;
   currentId = 0;
+  public imagenes: any[] = [];
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -27,6 +28,7 @@ export class FormCategoriaComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildForm();
+    this.onChanges();
     this.route.params.subscribe(params => {
       this.currentId=params.id
     })
@@ -37,9 +39,8 @@ export class FormCategoriaComponent implements OnInit {
           return this.categoriasService.getById(params.id)
         }
       )).subscribe((categoria) => {
-        console.log(categoria);
-        
         let categorias = categoria.data
+        this.imagenes.push({ archivo: categorias.image});
         this.form.patchValue(categorias);
         this.alertService.hideSwal();
     })
@@ -49,6 +50,7 @@ export class FormCategoriaComponent implements OnInit {
     if (this.form.valid) {
       let item = this.form.value;
       this.alertService.showLoading();
+      item.image = this.imagenes[0].archivo;
       if (this.currentId > 0) {
         this.categoriasService.update2(this.currentId ,item).subscribe((res) => {
           this.alertService.showSuccess();
@@ -67,7 +69,42 @@ export class FormCategoriaComponent implements OnInit {
   buildForm() {
     this.form = this.fb.group({
       name: ['', Validators.required],
+      image: ['']
     })
+  }
+
+  onChanges() {
+    this.form.get('image').valueChanges.subscribe(response => {
+      if (this.imagenes.length == 0) {
+        if (response?.files) {
+          this.categoriasService.convertFile(response?.files[0]).then((stringImg => {
+            this.imagenes.push({ archivo: stringImg, id: 0, nombre: response.files[0].name });
+            this.form.get('image').setValue('', { emitEvent: false });
+            console.log(this.imagenes);
+            
+          }));
+        }
+      } else {
+        this.alertService.showErrorNoSeCargaMasDeUnArchivo();
+      }
+    });
+  }
+
+  removeImage(doc, ix) {
+    Swal.fire({
+      title: 'Atencion',
+      text: 'Se perderan los cambios no guardados,¿Seguro?',
+      icon: 'question',
+      cancelButtonText: 'No',
+      confirmButtonText: 'Si, continuar',
+      showCancelButton: true
+
+    }).then((response) => {
+      if (!response.dismiss) {
+        this.imagenes.splice(ix, 1);
+      }
+    })
+
   }
 
   cancel() {

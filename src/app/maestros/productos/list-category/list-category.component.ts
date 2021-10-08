@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-list-category',
   templateUrl: './list-category.component.html',
-  styleUrls: ['./list-category.component.sass']
+  styleUrls: ['./list-category.component.scss']
 })
 export class ListCategoryComponent implements OnInit {
 

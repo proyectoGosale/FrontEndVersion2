@@ -19,19 +19,10 @@ export class FormZonaComercialComponent implements OnInit {
   {name: 'Pereira'},{name:'Armenia'},{name:'Valledupar'},{name:'Bucaramanga'},{name:'Yopal'}
   ]
 
-  counter = 0;
-
-  increment() {
-    this.counter++; 
-  }          
-
-  desIncrement() {
-    this.counter--;
-  }
-
   allVendedores: any[] = [];
   form: FormGroup;
   currentId = 0;
+  currentParamsId = 0;
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -44,6 +35,9 @@ export class FormZonaComercialComponent implements OnInit {
   ngOnInit(): void {
     this.buildForm();
     this.getData();
+    this.route.params.subscribe(resp => {
+      this.currentParamsId = resp.id
+    })
     this.route.params.pipe(
       filter(params => params.id > 0),
       mergeMap((params) => {
@@ -51,6 +45,8 @@ export class FormZonaComercialComponent implements OnInit {
           return this.zonaService.getById(params.id)
         }
       )).subscribe((almacen) => {
+        console.log(almacen);
+        
         this.form.patchValue(almacen.data);
         this.currentId = almacen.id;
         this.alertService.hideSwal();
@@ -62,10 +58,10 @@ export class FormZonaComercialComponent implements OnInit {
     if (this.form.valid) {
       let item = this.form.value;
       this.alertService.showLoading();
-      if (this.currentId > 0) {
+      if (this.currentParamsId > 0) {
         item.id = this.currentId;
-        this.zonaService.update2(this.currentId, item).subscribe((res) => {
-          
+        this.zonaService.update2(this.currentParamsId, item).subscribe((res) => {
+          this.alertService.showSuccess();
           this.router.navigate(['./maestros/zonas'])
         });
       } else {

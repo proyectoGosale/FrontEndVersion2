@@ -17,17 +17,14 @@ export class FormCotizacionComponent implements OnInit {
 
   listStatus: any[] = [
     {
-      nombre: 'Elaborado'
+      nombre: 'Elaboracion'
     },
     {
-      nombre: 'Preaprobado'
+      nombre: 'Anulado'
     },
     {
       nombre: 'Aprobado'
     },
-    {
-      nombre: 'Cancelado'
-    }
   ]
   vendedor: any[] = [];
   listClientes: any[] = [];
@@ -85,17 +82,16 @@ export class FormCotizacionComponent implements OnInit {
     if (this.form.valid) {
       let item = this.form.value;
       this.alertService.showLoading();
-      item.id = this.currentId;
       if (this.currentId > 0) {
+        item.id = this.currentId;
         this.cotizacionService.update2(this.currentId, item).subscribe((res) => {
           this.alertService.showSuccess();
-          this.router.navigate(['./maestros/clientes'])
+          this.router.navigate(['./maestros/cotizaciones'])
         });
       } else {
         this.cotizacionService.save(item).subscribe((res) => {
-          this.idPorCliente = res.id
           this.alertService.showClienteCreado();
-          this.router.navigate(['./maestros/clientes'])
+          this.router.navigate(['./maestros/cotizaciones'])
         });
       }
     } else {
@@ -130,7 +126,7 @@ export class FormCotizacionComponent implements OnInit {
 
     }).then((response) => {
       if (!response.dismiss) {
-        this.router.navigate(['./maestros/clientes'])
+        this.router.navigate(['./maestros/cotizaciones'])
       }
     })
   }

@@ -57,8 +57,8 @@ export class FormClientesComponent implements OnInit {
     if (this.form.valid) {
       let item = this.form.value;
       this.alertService.showLoading();
-      item.id = this.currentId;
       if (this.currentId > 0) {
+        item.id = this.currentId;
         this.clientesService.update2(this.currentId, item).subscribe((res) => {
           this.alertService.showSuccess();
           this.router.navigate(['./maestros/clientes'])

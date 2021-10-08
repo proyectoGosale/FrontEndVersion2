@@ -19,8 +19,8 @@
                     </div>
                     <div class="body">
                             <div class="row">
-                                <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 mb-3">
-                                    <mat-card class="example-card">
+                                <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 mb-3" style="padding-top: 40px;">
+                                    
                                         <mat-card-title class="card-text mt-2 h4">Descripción detallada del producto</mat-card-title>
                                         <mat-card-content class="mb-1" *ngFor="let productos of producto">
                                             <p>{{productos.description}}</p>
@@ -33,16 +33,14 @@
                                         <mat-card-content class="mb-1" *ngFor="let productos of producto">
                                             <p>{{productos.available}}</p>
                                         </mat-card-content>
-                                    </mat-card>
                                 </div>
                                 <div class="col-xl-7 col-lg-7 col-md-7 col-sm-12 mb-3">
-                                    <mat-card class="example-card">
+                                   
                                         <div *ngFor="let image of producto">
                                               <div class="carousel-item active">
                                                 <img class="d-block w-100" [src]="image.image" alt="foto del producto">
                                               </div>
                                           </div>
-                                    </mat-card>
                                 </div>
                             </div>
                             

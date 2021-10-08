@@ -26,11 +26,11 @@
                     <div class="body">
                         <form class="m-4" [formGroup]="form" (ngSubmit)="submit()">
 
-                            <!-- <div class="row">
+                            <div class="row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <mat-form-field class="example-full-width">
                                         <mat-label>Nombre de compañia</mat-label>
-                                        <input disabled [value]="categorias?.business_name" matInput >                                        
+                                        <input disabled  matInput >                                        
                                         <mat-icon matSuffix>work_outline</mat-icon>
                                     </mat-form-field>
                                 </div>
@@ -39,11 +39,11 @@
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <mat-form-field class="example-full-width">
                                         <mat-label>Nit</mat-label>
-                                        <input disabled matInput [value]="categorias?.nit" >
+                                        <input disabled matInput  >
                                         <mat-icon matSuffix>work_outline</mat-icon>
                                     </mat-form-field>
                                 </div>
-                            </div> -->
+                            </div>
                             <div class="row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <mat-form-field class="example-full-width">
@@ -72,7 +72,7 @@
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <mat-form-field class="example-full-width">
                                         <mat-label>Telefono</mat-label>
-                                        <input type="number" matInput formControlName="phone" required>
+                                        <input matInput formControlName="phone" required>
                                         <mat-icon matSuffix>work_outline</mat-icon>
                                         <mat-error *ngIf="form.get('phone').hasError('required')">
                                             Telefono es requerido
