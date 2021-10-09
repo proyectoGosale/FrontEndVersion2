@@ -4,6 +4,8 @@ import { CategoriaComponent } from './categoria/categoria.component';
 import { FormCategoriaComponent } from './categoria/form-categoria/form-categoria.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { FormClientesComponent } from './clientes/form-clientes/form-clientes.component';
+import { ColeccionComponent } from './coleccion/coleccion.component';
+import { FormColeccionComponent } from './coleccion/form-coleccion/form-coleccion.component';
 import { CompaniaComponent } from './compania/compania.component';
 import { FormCompaniaComponent } from './compania/form-compania/form-compania.component';
 import { CotizacionComponent } from './cotizacion/cotizacion.component';
@@ -206,6 +208,19 @@ const routes: Routes = [
             {
                 path: 'form/:id',
                 component: FormCuentasPorCobrarComponent
+            },
+        ]
+    },
+    {
+        path: 'coleccion',
+        children: [
+            {
+                path: '',
+                component: ColeccionComponent
+            },
+            {
+                path: 'form/:id',
+                component: FormColeccionComponent
             },
         ]
     },

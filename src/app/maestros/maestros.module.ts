@@ -57,6 +57,8 @@ import { FormNotasCreditoComponent } from './notas-de-credito/form-notas-credito
 import { FormDevolucionesComponent } from './devoluciones/form-devoluciones/form-devoluciones.component';
 import { FormCotizacionComponent } from './cotizacion/form-cotizacion/form-cotizacion.component';
 import { FormOrdenPedidoComponent } from './orden-pedido/form-orden-pedido/form-orden-pedido.component';
+import { ColeccionComponent } from './coleccion/coleccion.component';
+import { FormColeccionComponent } from './coleccion/form-coleccion/form-coleccion.component';
 
 
 
@@ -98,6 +100,8 @@ import { FormOrdenPedidoComponent } from './orden-pedido/form-orden-pedido/form-
     FormDevolucionesComponent,
     FormCotizacionComponent,
     FormOrdenPedidoComponent,
+    ColeccionComponent,
+    FormColeccionComponent,
   ],
   imports: [
     CommonModule,

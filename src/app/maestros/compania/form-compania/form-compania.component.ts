@@ -14,7 +14,9 @@ import Swal from 'sweetalert2';
 export class FormCompaniaComponent implements OnInit {
 
   listCategory: any[] = [];
-  categorias: any[] = [];
+  categorias: any;
+  nameCompania: any;
+  nit: any;
   form: FormGroup;
   currentId = 0;
   constructor(
@@ -26,7 +28,7 @@ export class FormCompaniaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.buildForm();
+    
     this.route.params.subscribe(params => {
       this.currentId=params.id
     })
@@ -36,15 +38,16 @@ export class FormCompaniaComponent implements OnInit {
         this.alertService.showLoading();
           return this.companiaService.getById(params.id)
         }
-      )).subscribe((categoria:any) => {
+      )).subscribe((categoria) => {
+        this.nameCompania = categoria.business_name;
+        this.nit = categoria.nit;
         this.categorias = categoria.data;
-        console.log();
-        
         this.form.patchValue(this.categorias);
         this.alertService.hideSwal();
         console.log(this.categorias);
         
     })
+    this.buildForm();
   }
 
   submit() {

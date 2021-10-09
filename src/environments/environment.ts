@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://abcf-190-102-125-24.ngrok.io/api/',
-  authUrl: 'http://abcf-190-102-125-24.ngrok.io/api'
+  apiUrl: 'http://2403-190-102-125-59.ngrok.io/api/',
+  authUrl: 'http://2403-190-102-125-59.ngrok.io/api'
 };
 
 /*

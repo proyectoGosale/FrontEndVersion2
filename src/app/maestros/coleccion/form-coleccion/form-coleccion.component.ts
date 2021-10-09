@@ -4,16 +4,40 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { filter, mergeMap } from 'rxjs/operators';
 import { AlertService } from 'src/services/alert.service';
 import { ClientesService } from 'src/services/clientes.service';
+import { ColeccionService } from 'src/services/coleccion.service';
 import { VendedoresService } from 'src/services/vendedores.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-form-clientes',
-  templateUrl: './form-clientes.component.html',
-  styleUrls: ['./form-clientes.component.sass']
+  selector: 'app-form-coleccion',
+  templateUrl: './form-coleccion.component.html',
+  styleUrls: ['./form-coleccion.component.sass']
 })
-export class FormClientesComponent implements OnInit {
+export class FormColeccionComponent implements OnInit {
 
+  listStatus: any[] = [
+    {
+      nombre: 'Elaborado'
+    },
+    {
+      nombre: 'Preaprobado'
+    },
+    {
+      nombre: 'Aprobado'
+    },
+    {
+      nombre: 'Anulado'
+    }
+  ]
+
+  listStatusMetodoPago: any[] = [
+    {
+      nombre: 'Credito'
+    },
+    {
+      nombre: 'Contraentrega'
+    }
+  ]
   vendedor: any[] = [];
   listVendedores: any[] = [];
   idPorCliente = 0;
@@ -24,8 +48,8 @@ export class FormClientesComponent implements OnInit {
     private router: Router,
     private alertService: AlertService,
     private route: ActivatedRoute,
-    private clientesService: ClientesService,
-    private vendedoresService: VendedoresService
+    private vendedoresService: VendedoresService,
+    private coleccionService: ColeccionService
   ) { }
 
   ngOnInit(): void {
@@ -35,12 +59,11 @@ export class FormClientesComponent implements OnInit {
       filter(params => params.id > 0),
       mergeMap((params) => {
         this.alertService.showLoading();
-          return this.clientesService.getById(params.id)
+          return this.coleccionService.getById(params.id)
         }
       )).subscribe((cliente) => {
         let clientes = cliente.data
         this.form.patchValue(clientes);
-        this.form.patchValue(cliente.dataA);
         this.currentId = clientes.id;
         this.alertService.hideSwal();
     })
@@ -58,17 +81,17 @@ export class FormClientesComponent implements OnInit {
     if (this.form.valid) {
       let item = this.form.value;
       this.alertService.showLoading();
+      item.id = this.currentId;
       if (this.currentId > 0) {
-        item.id = this.currentId;
-        this.clientesService.update2(this.currentId, item).subscribe((res) => {
+        this.coleccionService.update2(this.currentId, item).subscribe((res) => {
           this.alertService.showSuccess();
-          this.router.navigate(['./maestros/clientes'])
+          this.router.navigate(['./maestros/coleccion'])
         });
       } else {
-        this.clientesService.save(item).subscribe((res) => {
+        this.coleccionService.save(item).subscribe((res) => {
           this.idPorCliente = res.id
           this.alertService.showClienteCreado();
-          this.router.navigate(['./maestros/clientes'])
+          this.router.navigate(['./maestros/coleccion'])
         });
       }
     } else {
@@ -77,16 +100,11 @@ export class FormClientesComponent implements OnInit {
 
   buildForm() {
     this.form = this.fb.group({
+      method_of_payment: ['', Validators.required],
       user_id: ['', Validators.required],
-      name: ['', Validators.required],
-      phone: ['', Validators.required],
-      payment_terms: ['', Validators.required],
-      city: ['', Validators.required],
-      neighborhood: ['', Validators.required],
-      street: ['', Validators.required],
-      number: ['', Validators.required],
-      contact_name: ['', Validators.required],
-      nit: ['', Validators.required]
+      date: ['', Validators.required],
+      value: ['', Validators.required],
+      status: ['', Validators.required],
     })
   }
 
@@ -101,9 +119,9 @@ export class FormClientesComponent implements OnInit {
 
     }).then((response) => {
       if (!response.dismiss) {
-        this.router.navigate(['./maestros/clientes'])
+        this.router.navigate(['./maestros/coleccion'])
       }
     })
-  }
+  } 
 
 }

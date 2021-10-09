@@ -4,6 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { filter, mergeMap } from 'rxjs/operators';
 import { AlertService } from 'src/services/alert.service';
 import { ClientesService } from 'src/services/clientes.service';
+import { CotizacionService } from 'src/services/cotizacion.service';
+import { CuentasPorCobrarService } from 'src/services/cuentas-por-cobrar.service';
+import { OrdenPedidoService } from 'src/services/orden-pedido.service';
 import { VendedoresService } from 'src/services/vendedores.service';
 import Swal from 'sweetalert2';
 
@@ -14,7 +17,23 @@ import Swal from 'sweetalert2';
 })
 export class FormOrdenPedidoComponent implements OnInit {
 
+  listStatus: any[] = [
+    {
+      nombre: 'Elaboracion'
+    },
+    {
+      nombre: 'Anulado'
+    },
+    {
+      nombre: 'Aprobado'
+    },
+  ]
+  listCuentasPorCobrar: any[] = [];
+  idCliente: number = 0;
+  idVendedor: number = 0;
+  clientes: any;
   vendedor: any[] = [];
+  listClientes: any[] = [];
   listVendedores: any[] = [];
   idPorCliente = 0;
   form: FormGroup;
@@ -24,24 +43,41 @@ export class FormOrdenPedidoComponent implements OnInit {
     private router: Router,
     private alertService: AlertService,
     private route: ActivatedRoute,
+    private ordenPedidoService: OrdenPedidoService,
     private clientesService: ClientesService,
-    private vendedoresService: VendedoresService
+    private vendedoresService: VendedoresService,
+    private cuentasPorCobrarService:CuentasPorCobrarService
   ) { }
 
   ngOnInit(): void {
-    this.buildForm();
-    this.getVendedores();
+
     this.route.params.pipe(
       filter(params => params.id > 0),
       mergeMap((params) => {
         this.alertService.showLoading();
-          return this.clientesService.getById(params.id)
+          return this.ordenPedidoService.getById(params.id)
         }
       )).subscribe((cliente) => {
-        let clientes = cliente.data
+        let clientes = cliente.data;
+        this.clientes = cliente.data
         this.form.patchValue(clientes);
         this.currentId = clientes.id;
         this.alertService.hideSwal();
+        console.log(this.clientes);
+        
+    })
+
+    this.buildForm();
+    this.getClientes();
+    this.getVendedores();
+    this.getCuentasPorCobrar();
+  }
+
+  getClientes() {
+    this.alertService.showLoading();
+    this.clientesService.getAll().subscribe(resp => {
+      this.listClientes = resp.data;
+      this.alertService.hideSwal();
     })
   }
 
@@ -53,21 +89,35 @@ export class FormOrdenPedidoComponent implements OnInit {
     })
   }
 
+  getCuentasPorCobrar() {
+    this.alertService.showLoading();
+    this.cuentasPorCobrarService.getAll().subscribe(resp => {
+      this.listCuentasPorCobrar = resp.data;
+      this.alertService.hideSwal();
+    })
+  }
+
+  cliente(idCliente) {
+    return this.listClientes.find(x => x.id == idCliente)
+  }
+
+  vendedores(idVendedor) {
+    return this.listVendedores.find(x => x.id == idVendedor)
+  }
+
   submit() {
     if (this.form.valid) {
       let item = this.form.value;
       this.alertService.showLoading();
-      item.id = this.currentId;
       if (this.currentId > 0) {
-        this.clientesService.update2(this.currentId, item).subscribe((res) => {
+        item.id = this.currentId;
+        item.client_id = this.clientes.client_id;
+        item.user_id = this.clientes.user_id;
+        item.date = this.clientes.date;
+        item.document_type = this.clientes.document_type;
+        this.ordenPedidoService.update2(this.currentId, item).subscribe((res) => {
           this.alertService.showSuccess();
-          this.router.navigate(['./maestros/clientes'])
-        });
-      } else {
-        this.clientesService.save(item).subscribe((res) => {
-          this.idPorCliente = res.id
-          this.alertService.showClienteCreado();
-          this.router.navigate(['./maestros/clientes'])
+          this.router.navigate(['./maestros/ordenPedido'])
         });
       }
     } else {
@@ -76,16 +126,15 @@ export class FormOrdenPedidoComponent implements OnInit {
 
   buildForm() {
     this.form = this.fb.group({
-      user_id: ['', Validators.required],
-      name: ['', Validators.required],
-      phone: ['', Validators.required],
-      payment_terms: ['', Validators.required],
-      city: ['', Validators.required],
-      neighborhood: ['', Validators.required],
-      street: ['', Validators.required],
-      number: ['', Validators.required],
-      contact_name: ['', Validators.required],
-      nit: ['', Validators.required]
+      date_of_delivery: ['', Validators.required],
+      due_date: ['', Validators.required],
+      status: ['', Validators.required],
+      quantity: ['', Validators.required],
+      subtotal: ['', Validators.required],
+      discount: ['', Validators.required],
+      tax: ['', Validators.required],
+      total: ['', Validators.required],
+      accounts_receivable_id: ['', Validators.required]
     })
   }
 
@@ -100,9 +149,10 @@ export class FormOrdenPedidoComponent implements OnInit {
 
     }).then((response) => {
       if (!response.dismiss) {
-        this.router.navigate(['./maestros/clientes'])
+        this.router.navigate(['./maestros/ordenPedido'])
       }
     })
   }
+
 
 }

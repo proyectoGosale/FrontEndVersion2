@@ -120,6 +120,15 @@ export const ROUTES: RouteInfo[] = [
     submenu: []
   },
   {
+    path: '/maestros/coleccion',
+    title: 'Coleccion',
+    moduleName: 'colección',
+    icon: 'far fa-file-alt',
+    class: '',
+    groupTitle: false,
+    submenu: []
+  },
+  {
     path: '/maestros/cotizaciones',
     title: 'Cotizaciones',
     moduleName: 'cotizaciones',

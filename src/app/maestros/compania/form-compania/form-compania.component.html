@@ -30,7 +30,7 @@
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <mat-form-field class="example-full-width">
                                         <mat-label>Nombre de compañia</mat-label>
-                                        <input disabled  matInput >                                        
+                                        <input disabled [value]="categorias?.business_name" matInput >                                        
                                         <mat-icon matSuffix>work_outline</mat-icon>
                                     </mat-form-field>
                                 </div>
@@ -39,7 +39,7 @@
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <mat-form-field class="example-full-width">
                                         <mat-label>Nit</mat-label>
-                                        <input disabled matInput  >
+                                        <input disabled [value]="categorias?.nit" matInput  >
                                         <mat-icon matSuffix>work_outline</mat-icon>
                                     </mat-form-field>
                                 </div>
