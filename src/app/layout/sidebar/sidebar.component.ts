@@ -83,52 +83,130 @@ export class SidebarComponent implements OnInit {
   }
 
   filterMenuOptions(option): Boolean {
-    return true;
-    // let rol = this.usuarioService.userData?.rol ?? null;
-    // switch (option.moduleName) {
-    //   case 'maestros':
-    //     switch (rol) {
-    //       case 'coordMantenimiento':
-    //       case 'gerencia':
-    //         return true;
-    //       default:
-    //         return false;
-    //     }
-    //   case 'reporte':
-    //     switch (rol) {
-    //       case 'coordMantenimiento':
-    //       case 'gerencia':
-    //         return true;
-    //       default:
-    //         return false;
-    //     }
-    //   case 'OrdenTrabajo':
-    //     switch (rol) {
-    //       case 'coordMantenimiento':
-    //       case 'gerencia':
-    //         return true;
-    //       default:
-    //         return false;
-    //     }
-    //   case 'Solicitudes':
-    //     switch (rol) {
-    //       case 'coordMantenimiento':
-    //       case 'gerencia':
-    //         return true;
-    //       default:
-    //         return false;
-    //     }
-    //   case 'MisSolicitudes':
-    //     switch (rol) {
-    //       case 'analista':
-    //       case 'coordMantenimiento':
-    //         return true;
-    //       default:
-    //         return false;
-    //     }
-    //   default:
-    //     break;
-    // }
+    // return true;
+    let rol = localStorage.getItem('userRol') ?? null;
+    console.log(rol);
+    
+    switch (option.moduleName) {
+      case 'categorias':
+        switch (rol) {
+          case "1":
+            case "2":
+            return true;
+          default:
+            return false;
+        }
+        case 'zonas':
+        switch (rol) {
+          case "1":
+            case "2":
+            return true;
+          default:
+            return false;
+        }
+        case 'productos':
+        switch (rol) {
+          case "1":
+            case "2":
+            return true;
+          default:
+            return false;
+        }
+        case 'compañia':
+        switch (rol) {
+          case "1":
+            case "2":
+            return true;
+          default:
+            return false;
+        }
+        case 'clientes':
+        switch (rol) {
+          case "1":
+            case "2":
+              case "3":
+            return true;
+          default:
+            return false;
+        }
+        case 'vendedores':
+        switch (rol) {
+          case "1":
+            case "2":
+            return true;
+          default:
+            return false;
+        }
+        case 'facturas':
+        switch (rol) {
+          case "1":
+            case "2":
+            return true;
+          default:
+            return false;
+        }
+        case 'visitas':
+        switch (rol) {
+          case "1":
+            case "2":
+              case "3":
+            return true;
+          default:
+            return false;
+        }
+        case 'cuentasPorCobrar':
+        switch (rol) {
+          case "1":
+            case "2":
+            return true;
+          default:
+            return false;
+        }
+        case 'devoluciones':
+        switch (rol) {
+          case "1":
+            case "2":
+              case "3":
+            return true;
+          default:
+            return false;
+        }
+        case 'notasCredito':
+        switch (rol) {
+          case "1":
+            case "2":
+            return true;
+          default:
+            return false;
+        }
+        case 'colección':
+        switch (rol) {
+          case "1":
+            case "2":
+            return true;
+          default:
+            return false;
+        }
+        case 'cotizaciones':
+        switch (rol) {
+          case "1":
+            case "2":
+              case "3":
+            return true;
+          default:
+            return false;
+        }
+        case 'ordenPedido':
+        switch (rol) {
+          case "1":
+            case "2":
+              case "3":
+            return true;
+          default:
+            return false;
+        }
+       
+    }
   }
 
   initLeftSidebar() {

@@ -46,6 +46,8 @@ export class SigninComponent implements OnInit {
         .subscribe(
           (res) => {
             if (res.success) {
+              console.log(res);
+              
               // switch (rol) {
               //   case 'analista':
               //   case 'dirProyectos':
@@ -59,7 +61,7 @@ export class SigninComponent implements OnInit {
               //     break;
               // }
 
-              this.router.navigate(['/maestros/vendedores']);
+              this.router.navigate(['/maestros/clientes']);
               this.alertService.hideSwal();
             } else {
               this.error = 'Usuario  o contraseña no válidos';

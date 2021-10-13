@@ -38,9 +38,9 @@ export class AuthService {
         } else {
           return this.vendedoresService.getbyId(loginRepose.id).pipe(map((response: any) => {
             let resp = response.data;
-            if (resp.rol == "Admin" || resp.rol == 'SuperAdmin' || resp.rol == "Vendedor" || resp.rol == "programador") {
+            if (resp.rol == "Admin" || resp.rol == 'SuperAdmin' || resp.rol == "Vendor") {
               localStorage.setItem('STATE', 'true');
-              localStorage.setItem('UserGestionVendedores', JSON.stringify(resp));
+              localStorage.setItem('userRol', JSON.stringify(resp.role_id));
               localStorage.setItem('UserGestionVendedoresToken', JSON.stringify(loginRepose.access_token));
               this.isLogin = true;
               return { success: this.isLogin };

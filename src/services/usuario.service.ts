@@ -72,7 +72,7 @@ export class UsuarioService {
   }
 
   get userData() {
-    let info = JSON.parse(localStorage.getItem('UserGestionDespachos'));
+    let info = JSON.parse(localStorage.getItem('userData'));
     return info;
   }
 
